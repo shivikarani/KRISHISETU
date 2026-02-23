@@ -37,7 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core',
 ]
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "core/static"]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,7 +58,7 @@ ROOT_URLCONF = 'KrishiSetu.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "core/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h2>Farmer Registration</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
+{% if messages %}
+    {% for message in messages %}
+        <p style="color: green;">{{ message }}</p>
+    {% endfor %}
+{% endif %}
+{% endblock %}
