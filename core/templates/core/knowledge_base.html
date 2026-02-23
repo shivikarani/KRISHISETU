@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/knowledge.css' %}">
+
+<div class="kb-container">
+    <h2>Knowledge Base</h2>
+
+    <div id="categoryFilters" class="filters"></div>
+
+    <div id="articlesContainer" class="articles-grid"></div>
+</div>
+
+<script src="{% static 'js/knowledge.js' %}"></script>
+{% endblock %}

@@ -128,3 +128,46 @@ input, select, textarea {
     color: #2e7d32;
     margin-bottom: 5px;
 }
+
+
+/* Knowledge Base styles */
+.categories {
+    margin-bottom: 20px;
+}
+
+.category-link {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.category-link:hover {
+    background-color: #c8e6c9;
+}
+
+.articles-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.article-card {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.article-card:hover {
+    transform: translateY(-3px);
+}
+
+.article-card h3 {
+    color: #2e7d32;
+}

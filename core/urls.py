@@ -9,4 +9,7 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('submit-query/', views.submit_query, name='submit_query'),
     path('my-queries/', views.view_queries, name='view_queries'),
+    path('knowledge-base/', views.knowledge_base, name='knowledge_base'),
+    path('api/categories/', views.categories_api, name='categories_api'),
+    path('api/articles/', views.articles_api, name='articles_api'),
 ]
