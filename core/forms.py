@@ -25,7 +25,5 @@ from .models import Query
 class QueryForm(forms.ModelForm):
     class Meta:
         model = Query
-        fields = ['title', 'description', 'crop_type', 'media_file']
-        widgets = {
-            'description': forms.Textarea(attrs={'rows':4}),
-        }
+        fields = ['title', 'description', 'image', 'voice_file']
+        

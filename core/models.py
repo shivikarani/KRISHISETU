@@ -17,6 +17,8 @@ class Query(models.Model):
     media_file = models.FileField(upload_to='query_media/', blank=True, null=True)
     status = models.CharField(max_length=20, choices=QUERY_STATUS, default='submitted')
     created_at = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='query_images/', null=True, blank=True) 
+    voice_file = models.FileField(upload_to='query_voice/', null=True, blank=True)
 
     def __str__(self):
         return f"{self.title} - {self.farmer.username}"

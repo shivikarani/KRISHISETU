@@ -17,6 +17,11 @@
         {% endif %}
       </div>
     {% endfor %}
+    {% if query.voice_file %}
+    <audio controls>
+        <source src="{{ query.voice_file.url }}">
+    </audio>
+{% endif %}
   </div>
 {% else %}
   <p>You have not submitted any queries yet.</p>
