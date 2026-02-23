@@ -5,7 +5,7 @@
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="file" name="voice_file" accept="audio/*">
+    
     <button type="submit">Submit Query</button>
 </form>
 
