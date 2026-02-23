@@ -69,3 +69,11 @@ def submit_query(request):
     else:
         form = QueryForm()
     return render(request, 'core/submit_query.html', {'form': form})
+
+# previous queries
+
+@login_required(login_url='login')
+def view_queries(request):
+    # Fetch queries submitted by this farmer, newest first
+    queries = request.user.query_set.all().order_by('-created_at')
+    return render(request, 'core/view_queries.html', {'queries': queries})

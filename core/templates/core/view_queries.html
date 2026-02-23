@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h2>My Submitted Queries</h2>
+
+{% if queries %}
+  <div class="queries-container">
+    {% for query in queries %}
+      <div class="query-card">
+        <h3>{{ query.title }}</h3>
+        <p><strong>Crop Type:</strong> {{ query.crop_type }}</p>
+        <p>{{ query.description }}</p>
+        <p><strong>Status:</strong> {{ query.get_status_display }}</p>
+        <p><strong>Submitted On:</strong> {{ query.created_at|date:"d M Y H:i" }}</p>
+        {% if query.media_file %}
+          <p><a href="{{ query.media_file.url }}" target="_blank">View Attached File</a></p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>You have not submitted any queries yet.</p>
+{% endif %}
+{% endblock %}
