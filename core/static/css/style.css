@@ -56,3 +56,48 @@ input, select, textarea {
     border-radius: 5px;
     border: 1px solid #ccc;
 }
+
+
+/* dashboard */
+
+/* Dashboard styles */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 800px;
+    margin: auto;
+}
+
+.dashboard-container h2 {
+    color: #2e7d32;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.dashboard-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.dashboard-links a {
+    flex: 1 1 200px;
+    text-align: center;
+    padding: 20px;
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    font-weight: bold;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.dashboard-links a:hover {
+    background-color: #c8e6c9;
+    transform: translateY(-5px);
+}
