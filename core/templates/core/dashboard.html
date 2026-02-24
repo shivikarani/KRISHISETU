@@ -17,4 +17,21 @@
         <a href="{% url 'logout' %}">Logout</a>
     </div>
 </div>
+{% if weather %}
+<div class="weather-card">
+    <h3>Weather in {{ weather.city }}</h3>
+
+    <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png">
+
+    <p><strong>Temperature:</strong> {{ weather.temperature }} °C</p>
+    <p><strong>Humidity:</strong> {{ weather.humidity }}%</p>
+    <p><strong>Condition:</strong> {{ weather.description }}</p>
+</div>
+{% endif %}
+{% if advisory %}
+<div class="advisory-box">
+    <h4>🌾 Farming Advisory</h4>
+    <p>{{ advisory }}</p>
+</div>
+{% endif %}
 {% endblock %}

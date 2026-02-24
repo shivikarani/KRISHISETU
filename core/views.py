@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from .models import Notification
 from .models import Article, Category
 from .models import Query, ExpertResponse
+import requests
+from django.conf import settings
 def home(request):
     return render(request, 'core/home.html')
 
@@ -57,7 +59,42 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request, 'core/dashboard.html')
+
+    city = "Delhi"  # abhi static rakhenge, baad me dynamic karenge
+
+    api_key = settings.OPENWEATHER_API_KEY
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+
+    response = requests.get(url)
+    data = response.json()
+
+    weather_data = None
+
+    if response.status_code == 200:
+        weather_data = {
+            "city": city,
+            "temperature": data["main"]["temp"],
+            "humidity": data["main"]["humidity"],
+            "description": data["weather"][0]["description"],
+            "icon": data["weather"][0]["icon"]
+        }
+
+        advisory = ""
+
+        if weather_data:
+            temp = weather_data["temperature"]
+
+            if temp > 35:
+                advisory = "High temperature! Ensure proper irrigation."
+            elif temp < 10:
+                advisory = "Low temperature! Protect crops from frost."
+            else:
+                advisory = "Weather conditions are suitable for farming activities."
+
+    return render(request, 'core/dashboard.html', {
+        "weather": weather_data,
+        "advisory": advisory
+    })
 
 
 # query submission

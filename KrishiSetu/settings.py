@@ -132,3 +132,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'login'
 
+import os
+
+from decouple import config
+
+OPENWEATHER_API_KEY = config('OPENWEATHER_API_KEY')
