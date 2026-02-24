@@ -1,34 +1,35 @@
 {% extends 'core/base.html' %}
-{% load static %}
-
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/view_queries.css' %}">
 
 <h2>My Queries</h2>
 
-<div class="queries-container">
-    {% if queries %}
-        {% for query in queries %}
-            <div class="query-card">
-                <h3>{{ query.title }}</h3>
-                <p>{{ query.description }}</p>
+{% for query in queries %}
+<div style="border:1px solid #ccc; padding:15px; margin-bottom:15px;">
+    
+    <h3>{{ query.title }}</h3>
+    <p><strong>Description:</strong> {{ query.description }}</p>
+    <p><strong>Status:</strong> {{ query.status }}</p>
+    <p><strong>Date:</strong> {{ query.created_at }}</p>
 
-                {% if query.image %}
-                    <img src="{{ query.image.url }}" alt="Query Image">
-                {% endif %}
-
-                {% if query.voice_file %}
-                    <audio controls>
-                        <source src="{{ query.voice_file.url }}">
-                        Your browser does not support the audio element.
-                    </audio>
-                {% endif %}
-
-                <p class="date">Submitted on: {{ query.created_at|date:"d M Y H:i" }}</p>
-            </div>
-        {% endfor %}
-    {% else %}
-        <p>No queries submitted yet.</p>
+    {% if query.image %}
+        <img src="{{ query.image.url }}" width="200">
     {% endif %}
+
+    {% if query.is_answered %}
+        <hr>
+        <h4>Expert Response:</h4>
+        <p>{{ query.response_text }}</p>
+
+        {% if query.response_file %}
+            <a href="{{ query.response_file.url }}">Download Attachment</a>
+        {% endif %}
+    {% else %}
+        <p><em>No response yet.</em></p>
+    {% endif %}
+
 </div>
+{% empty %}
+<p>No queries submitted yet.</p>
+{% endfor %}
+
 {% endblock %}
