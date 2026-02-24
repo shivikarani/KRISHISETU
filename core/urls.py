@@ -14,4 +14,5 @@ urlpatterns = [
     path('api/articles/', views.articles_api, name='articles_api'),
     path('expert-dashboard/', views.expert_dashboard, name='expert_dashboard'),
     path('respond/<int:query_id>/', views.respond_query, name='respond_query'),
+    path('notifications/', views.notifications_view, name='notifications'),
 ]

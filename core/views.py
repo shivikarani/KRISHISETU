@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-
+from .models import Notification
 from .models import Article, Category
 from .models import Query, ExpertResponse
 def home(request):
@@ -161,7 +161,17 @@ def respond_query(request, query_id):
         query.is_answered = True
         query.response_text = response_text
         query.save()
+        Notification.objects.create(
+            user=query.farmer,
+            message=f"Your query '{query.title}' has been answered."
+        )
 
         return redirect('expert_dashboard')
 
     return render(request, 'core/respond_query.html', {'query': query})
+
+
+@login_required(login_url='login')
+def notifications_view(request):
+    notifications = Notification.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'core/notifications.html', {'notifications': notifications})

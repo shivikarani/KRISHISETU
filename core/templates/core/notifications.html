@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+<h2>Notifications</h2>
+
+{% for note in notifications %}
+<div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+    <p>{{ note.message }}</p>
+    <small>{{ note.created_at }}</small>
+</div>
+{% empty %}
+<p>No notifications yet.</p>
+{% endfor %}
+
+{% endblock %}
