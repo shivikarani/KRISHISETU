@@ -1,29 +1,34 @@
 {% extends 'core/base.html' %}
+{% load static %}
 
 {% block content %}
-<h2>My Submitted Queries</h2>
+<link rel="stylesheet" href="{% static 'css/view_queries.css' %}">
 
-{% if queries %}
-  <div class="queries-container">
-    {% for query in queries %}
-      <div class="query-card">
-        <h3>{{ query.title }}</h3>
-        <p><strong>Crop Type:</strong> {{ query.crop_type }}</p>
-        <p>{{ query.description }}</p>
-        <p><strong>Status:</strong> {{ query.get_status_display }}</p>
-        <p><strong>Submitted On:</strong> {{ query.created_at|date:"d M Y H:i" }}</p>
-        {% if query.media_file %}
-          <p><a href="{{ query.media_file.url }}" target="_blank">View Attached File</a></p>
-        {% endif %}
-      </div>
-    {% endfor %}
-    {% if query.voice_file %}
-    <audio controls>
-        <source src="{{ query.voice_file.url }}">
-    </audio>
-{% endif %}
-  </div>
-{% else %}
-  <p>You have not submitted any queries yet.</p>
-{% endif %}
+<h2>My Queries</h2>
+
+<div class="queries-container">
+    {% if queries %}
+        {% for query in queries %}
+            <div class="query-card">
+                <h3>{{ query.title }}</h3>
+                <p>{{ query.description }}</p>
+
+                {% if query.image %}
+                    <img src="{{ query.image.url }}" alt="Query Image">
+                {% endif %}
+
+                {% if query.voice_file %}
+                    <audio controls>
+                        <source src="{{ query.voice_file.url }}">
+                        Your browser does not support the audio element.
+                    </audio>
+                {% endif %}
+
+                <p class="date">Submitted on: {{ query.created_at|date:"d M Y H:i" }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No queries submitted yet.</p>
+    {% endif %}
+</div>
 {% endblock %}

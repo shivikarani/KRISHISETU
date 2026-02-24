@@ -79,17 +79,6 @@ def view_queries(request):
     return render(request, 'core/view_queries.html', {'queries': queries})
 
 
-# knowledge base view
-
-
-# def knowledge_base(request):
-#     category_id = request.GET.get('category')
-#     if category_id:
-#         articles = Article.objects.filter(category_id=category_id).order_by('-created_at')
-#     else:
-#         articles = Article.objects.all().order_by('-created_at')
-#     categories = Category.objects.all()
-#     return render(request, 'core/knowledge_base.html', {'articles': articles, 'categories': categories})
 
 
 # creating api
