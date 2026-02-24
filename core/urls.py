@@ -12,4 +12,6 @@ urlpatterns = [
     path('knowledge-base/', views.knowledge_base, name='knowledge_base'),
     path('api/categories/', views.categories_api, name='categories_api'),
     path('api/articles/', views.articles_api, name='articles_api'),
+    path('expert-dashboard/', views.expert_dashboard, name='expert_dashboard'),
+    path('respond/<int:query_id>/', views.respond_query, name='respond_query'),
 ]

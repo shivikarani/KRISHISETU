@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 
 from .models import Article, Category
+from .models import Query, ExpertResponse
 def home(request):
     return render(request, 'core/home.html')
 
@@ -116,3 +117,42 @@ def categories_api(request):
 @login_required(login_url='login')
 def knowledge_base(request):
     return render(request, 'core/knowledge_base.html')
+
+
+
+
+
+from django.contrib.auth.decorators import user_passes_test
+
+def is_expert(user):
+    return user.groups.filter(name='Expert').exists()
+
+@user_passes_test(is_expert, login_url='login')
+def expert_dashboard(request):
+    queries = Query.objects.all().order_by('-created_at')
+    return render(request, 'core/expert_dashboard.html', {'queries': queries})
+
+
+@user_passes_test(is_expert, login_url='login')
+def respond_query(request, query_id):
+    query = Query.objects.get(id=query_id)
+
+    if request.method == 'POST':
+        response_text = request.POST.get('response_text')
+        response_voice = request.FILES.get('response_voice')
+
+        ExpertResponse.objects.create(
+            query=query,
+            expert=request.user,
+            response_text=response_text,
+            response_voice=response_voice
+        )
+
+        query.status = 'responded'
+        query.is_answered = True
+        query.response_text = response_text
+        query.save()
+
+        return redirect('expert_dashboard')
+
+    return render(request, 'core/respond_query.html', {'query': query})

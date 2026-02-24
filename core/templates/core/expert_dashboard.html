@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+<h2>Expert Dashboard</h2>
+
+<table border="1" width="100%">
+    <tr>
+        <th>Title</th>
+        <th>Farmer</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Action</th>
+    </tr>
+
+    {% for query in queries %}
+    <tr>
+        <td>{{ query.title }}</td>
+        <td>{{ query.farmer.username }}</td>
+        <td>{{ query.status }}</td>
+        <td>{{ query.created_at }}</td>
+        <td>
+            <a href="{% url 'respond_query' query.id %}">Respond</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5">No Queries Available</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
