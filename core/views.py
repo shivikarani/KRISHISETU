@@ -174,4 +174,8 @@ def respond_query(request, query_id):
 @login_required(login_url='login')
 def notifications_view(request):
     notifications = Notification.objects.filter(user=request.user).order_by('-created_at')
+
+    # mark all as read
+    notifications.filter(is_read=False).update(is_read=True)
+
     return render(request, 'core/notifications.html', {'notifications': notifications})
