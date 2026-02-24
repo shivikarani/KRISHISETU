@@ -11,10 +11,29 @@
     <header>
         <h1>KrishiSetu</h1>
         <nav>
-            <a href="{% url 'home' %}">Home</a> |
-            <a href="{% url 'register' %}">Register</a> 
-            <a href="{% url 'login' %}">Login</a>
-        </nav>
+    <a href="{% url 'home' %}">Home</a>
+
+    {% if user.is_authenticated %}
+
+        {% if user.groups.all.0.name == "Expert" %}
+            <a href="{% url 'expert_dashboard' %}">Expert Dashboard</a>
+        {% else %}
+            <a href="{% url 'dashboard' %}">Farmer Dashboard</a>
+            <a href="{% url 'submit_query' %}">Submit Query</a>
+            <a href="{% url 'view_queries' %}">My Queries</a>
+        {% endif %}
+
+        <a href="{% url 'knowledge_base' %}">Knowledge Base</a>
+        <a href="{% url 'logout' %}">Logout</a>
+
+    {% else %}
+
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+        <a href="{% url 'knowledge_base' %}">Knowledge Base</a>
+
+    {% endif %}
+</nav>
     </header>
     <main>
         {% block content %}{% endblock %}
