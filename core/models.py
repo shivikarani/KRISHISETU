@@ -79,3 +79,17 @@ class Notification(models.Model):
 
     def __str__(self):
         return self.message
+
+
+
+class MarketPrice(models.Model):
+    crop_name = models.CharField(max_length=100)
+    mandi = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    min_price = models.FloatField()
+    max_price = models.FloatField()
+    modal_price = models.FloatField()
+    arrival_date = models.DateField()
+
+    def __str__(self):
+        return f"{self.crop_name} - {self.mandi}"

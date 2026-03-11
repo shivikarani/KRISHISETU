@@ -137,3 +137,5 @@ import os
 from decouple import config
 
 OPENWEATHER_API_KEY = config('OPENWEATHER_API_KEY')
+
+DATA_GOV_API_KEY =config('DATA_GOV_API_KEY')

@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% comment %} {% load static %} {% endcomment %}
+{% load static %}
 {% block content %}
 {% if messages %}
     {% for message in messages %}
@@ -34,4 +34,26 @@
     <p>{{ advisory }}</p>
 </div>
 {% endif %}
+
+<div class="market-container">
+    <h2>Latest Mandi Prices</h2>
+
+    <table border="1">
+    <thead>
+        <tr>
+            <th>Crop</th>
+            <th>Mandi</th>
+            <th>State</th>
+            <th>Min Price</th>
+            <th>Max Price</th>
+            <th>Modal Price</th>
+        </tr>
+    </thead>
+
+    <tbody id="mandi-data">
+    </tbody>
+</table>
+</div>
+
+<script src="{% static 'js/market.js' %}"></script>
 {% endblock %}

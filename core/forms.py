@@ -27,3 +27,6 @@ class QueryForm(forms.ModelForm):
         model = Query
         fields = ['title', 'description', 'image', 'voice_file']
         
+
+
+
