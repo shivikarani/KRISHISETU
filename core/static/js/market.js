@@ -27,6 +27,7 @@ fetch("/api/market-prices/")
 
 });
 
+
 function searchCrop(){
 
     const input = document.getElementById("cropSearch").value.toLowerCase()

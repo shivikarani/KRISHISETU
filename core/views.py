@@ -229,9 +229,10 @@ from django.http import JsonResponse
 def market_prices(request):
 
     api_key = settings.DATA_GOV_API_KEY
-
+    state = request.GET.get("state")
     url = f"https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=579b464db66ec23bdd000001adf9c207395e44127e9e6a3e5fc9f71d&format=json&limit=100&offset=100"
-
+    if state:
+        url += f"&filters[state]={state}"
     response = requests.get(url)
     data = response.json()
     records = data.get("records", [])
