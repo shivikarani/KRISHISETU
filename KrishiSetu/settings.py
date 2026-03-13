@@ -136,6 +136,10 @@ import os
 
 from decouple import config
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 OPENWEATHER_API_KEY = config('OPENWEATHER_API_KEY')
 
-DATA_GOV_API_KEY =config('DATA_GOV_API_KEY')
+DATA_GOV_API_KEY = os.getenv("DATA_GOV_API_KEY")

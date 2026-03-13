@@ -220,33 +220,20 @@ def notifications_view(request):
 
 
 
+
+from django.conf import settings
 import requests
 from django.http import JsonResponse
 
+
 def market_prices(request):
 
-    url = "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070"
+    api_key = settings.DATA_GOV_API_KEY
 
-    params = {
-        "api-key": "YOUR_API_KEY",
-        "format": "json",
-        "limit": 10
-    }
+    url = f"https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=579b464db66ec23bdd000001adf9c207395e44127e9e6a3e5fc9f71d&format=json&limit=100&offset=100"
 
-    response = requests.get(url, params=params)
+    response = requests.get(url)
     data = response.json()
+    records = data.get("records", [])
 
-    results = []
-
-    if "records" in data:
-        for item in data["records"]:
-            results.append({
-                "crop": item.get("commodity"),
-                "mandi": item.get("market"),
-                "state": item.get("state"),
-                "min_price": item.get("min_price"),
-                "max_price": item.get("max_price"),
-                "modal_price": item.get("modal_price"),
-            })
-
-    return JsonResponse(results, safe=False)
+    return JsonResponse(records, safe=False)

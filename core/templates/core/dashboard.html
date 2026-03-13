@@ -35,24 +35,36 @@
 </div>
 {% endif %}
 
-<div class="market-container">
-    <h2>Latest Mandi Prices</h2>
+<div class="market-section">
 
-    <table border="1">
-    <thead>
-        <tr>
-            <th>Crop</th>
-            <th>Mandi</th>
-            <th>State</th>
-            <th>Min Price</th>
-            <th>Max Price</th>
-            <th>Modal Price</th>
-        </tr>
-    </thead>
+<h3>🌾 Latest Mandi Prices</h3>
+<input type="text" id="cropSearch" placeholder="Search Crop..." onkeyup="filterData()">
+<select id="stateFilter" onchange="filterData()">
+<option value="">All States</option>
+<option value="Uttar Pradesh">Uttar Pradesh</option>
+<option value="Punjab">Punjab</option>
+<option value="Tamil Nadu">Tamil Nadu</option>
+<option value="Haryana">Haryana</option>
+</select>
+<table id="marketTable">
 
-    <tbody id="mandi-data">
-    </tbody>
+<thead>
+<tr>
+<th>Commodity</th>
+<th>Market</th>
+<th>State</th>
+<th>Min Price</th>
+<th>Max Price</th>
+<th>Modal Price</th>
+</tr>
+</thead>
+
+<tbody>
+
+</tbody>
+
 </table>
+
 </div>
 
 <script src="{% static 'js/market.js' %}"></script>
