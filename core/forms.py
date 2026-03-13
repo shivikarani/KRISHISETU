@@ -30,3 +30,19 @@ class QueryForm(forms.ModelForm):
 
 
 
+
+
+
+class CropRecommendationForm(forms.Form):
+
+    SOIL_TYPES = [
+        ('clay', 'Clay'),
+        ('sandy', 'Sandy'),
+        ('loamy', 'Loamy')
+    ]
+
+    soil_type = forms.ChoiceField(choices=SOIL_TYPES)
+
+    temperature = forms.FloatField()
+    humidity = forms.FloatField()
+    rainfall = forms.FloatField()

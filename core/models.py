@@ -93,3 +93,22 @@ class MarketPrice(models.Model):
 
     def __str__(self):
         return f"{self.crop_name} - {self.mandi}"
+    
+
+class CropRecommendation(models.Model):
+
+    SOIL_TYPES = [
+        ('clay', 'Clay'),
+        ('sandy', 'Sandy'),
+        ('loamy', 'Loamy')
+    ]
+
+    soil_type = models.CharField(max_length=50, choices=SOIL_TYPES)
+    temperature = models.FloatField()
+    humidity = models.FloatField()
+    rainfall = models.FloatField()
+
+    recommended_crop = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.recommended_crop

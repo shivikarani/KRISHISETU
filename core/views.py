@@ -233,8 +233,54 @@ def market_prices(request):
     url = f"https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=579b464db66ec23bdd000001adf9c207395e44127e9e6a3e5fc9f71d&format=json&limit=100&offset=100"
     if state:
         url += f"&filters[state]={state}"
-    response = requests.get(url)
-    data = response.json()
-    records = data.get("records", [])
+    try:
 
-    return JsonResponse(records, safe=False)
+        response = requests.get(url, timeout=10)
+
+        if response.status_code == 200:
+            data = response.json()
+            records = data.get("records", [])
+            return JsonResponse(records, safe=False)
+
+        else:
+            return JsonResponse({"error": "API not responding"}, status=500)
+
+    except requests.exceptions.RequestException as e:
+        return JsonResponse({"error": "Connection failed"}, status=500)
+
+
+
+from .forms import CropRecommendationForm
+
+
+def crop_recommendation(request):
+
+    result = None
+
+    if request.method == "POST":
+
+        form = CropRecommendationForm(request.POST)
+
+        if form.is_valid():
+
+            soil = form.cleaned_data["soil_type"]
+            temp = form.cleaned_data["temperature"]
+            humidity = form.cleaned_data["humidity"]
+            rainfall = form.cleaned_data["rainfall"]
+
+            if soil == "clay" and rainfall > 200:
+                result = "Rice"
+
+            elif soil == "loamy" and temp > 20:
+                result = "Wheat"
+
+            elif soil == "sandy":
+                result = "Millet"
+
+            else:
+                result = "Maize"
+
+    else:
+        form = CropRecommendationForm()
+
+    return render(request, "core/crop_recommendation.html", {"form": form, "result": result})

@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<h2>🌱 Crop Recommendation System</h2>
+
+<form method="POST">
+{% csrf_token %}
+
+{{ form.as_p }}
+
+<button type="submit">Get Recommendation</button>
+
+</form>
+
+{% if result %}
+
+<h3>Recommended Crop: {{ result }}</h3>
+
+{% endif %}
+
+{% endblock %}

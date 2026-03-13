@@ -16,4 +16,5 @@ urlpatterns = [
     path('respond/<int:query_id>/', views.respond_query, name='respond_query'),
     path('notifications/', views.notifications_view, name='notifications'),
     path('api/market-prices/', views.market_prices, name='market_prices'),
+    path('crop-recommendation/', views.crop_recommendation, name='crop_recommendation')
 ]
