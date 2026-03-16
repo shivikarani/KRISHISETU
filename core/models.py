@@ -142,3 +142,11 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
     
+
+
+class DiseaseDetection(models.Model):
+    image = models.ImageField(upload_to='diseases/')
+    result = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.result or "No result"

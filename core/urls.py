@@ -20,4 +20,5 @@ urlpatterns = [
     path('schemes/', views.government_schemes, name='schemes'),
     path("profile/", views.profile, name="profile"),
     path('search/', views.search, name='search'),
+    path('disease-detection/', views.detect_disease, name='disease'),
 ]

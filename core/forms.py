@@ -55,3 +55,12 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         exclude = ['user']
+
+
+
+from .models import DiseaseDetection
+
+class DiseaseForm(forms.ModelForm):
+    class Meta:
+        model = DiseaseDetection
+        fields = ['image']

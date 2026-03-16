@@ -366,3 +366,29 @@ def search(request):
     }
 
     return render(request, 'core/search.html', context)
+
+
+
+import requests
+from .forms import DiseaseForm
+
+def detect_disease(request):
+
+    result = None
+
+    if request.method == "POST":
+        form = DiseaseForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            obj = form.save()
+
+            # 🔥 Fake AI logic (for now)
+            result = "Possible Disease: Leaf Spot\nSolution: Use fungicide spray"
+
+            obj.result = result
+            obj.save()
+
+    else:
+        form = DiseaseForm()
+
+    return render(request, "core/disease.html", {"form": form, "result": result})

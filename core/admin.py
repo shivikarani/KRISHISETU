@@ -12,3 +12,10 @@ admin.site.register(CropRecommendation)
 from .models import GovernmentScheme
 
 admin.site.register(GovernmentScheme)
+
+
+
+
+from .models import DiseaseDetection
+
+admin.site.register(DiseaseDetection)

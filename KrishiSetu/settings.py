@@ -143,3 +143,8 @@ load_dotenv()
 OPENWEATHER_API_KEY = config('OPENWEATHER_API_KEY')
 
 DATA_GOV_API_KEY = os.getenv("DATA_GOV_API_KEY")
+
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
