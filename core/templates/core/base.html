@@ -41,6 +41,10 @@
         <a href="{% url 'knowledge_base' %}">Knowledge Base</a>
 
     {% endif %}
+    <form method="GET" action="/search/" style="display:flex; gap:5px;">
+    <input type="text" name="q" placeholder="Search crops, schemes..." required>
+    <button type="submit">🔍</button>
+</form>
 </nav>
     </header>
     <main>

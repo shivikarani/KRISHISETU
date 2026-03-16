@@ -333,3 +333,36 @@ def profile(request):
         form = ProfileForm(instance=profile)
 
     return render(request, "core/profile.html", {"form": form})
+
+
+
+
+
+from django.db.models import Q
+from .models import Article, GovernmentScheme
+
+def search(request):
+
+    query = request.GET.get('q')
+
+    articles = []
+    schemes = []
+
+    if query:
+        articles = Article.objects.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query)
+        )
+
+        schemes = GovernmentScheme.objects.filter(
+            Q(title__icontains=query) |
+            Q(description__icontains=query)
+        )
+
+    context = {
+        'query': query,
+        'articles': articles,
+        'schemes': schemes
+    }
+
+    return render(request, 'core/search.html', context)

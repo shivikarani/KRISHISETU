@@ -19,4 +19,5 @@ urlpatterns = [
     path('crop-recommendation/', views.crop_recommendation, name='crop_recommendation'),
     path('schemes/', views.government_schemes, name='schemes'),
     path("profile/", views.profile, name="profile"),
+    path('search/', views.search, name='search'),
 ]

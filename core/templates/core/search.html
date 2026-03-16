@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<h2>🔍 Search Results for "{{ query }}"</h2>
+
+<hr>
+
+<h3>📚 Articles</h3>
+
+{% if articles %}
+    {% for article in articles %}
+        <div style="margin-bottom:15px; padding:10px; border:1px solid #ccc;">
+            <h4>{{ article.title }}</h4>
+            <p>{{ article.content|truncatewords:20 }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No articles found</p>
+{% endif %}
+
+<hr>
+
+<h3>🏛 Government Schemes</h3>
+
+{% if schemes %}
+    {% for scheme in schemes %}
+        <div style="margin-bottom:15px; padding:10px; border:1px solid #ccc;">
+            <h4>{{ scheme.title }}</h4>
+            <p>{{ scheme.description|truncatewords:20 }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No schemes found</p>
+{% endif %}
+
+{% endblock %}
