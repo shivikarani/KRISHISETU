@@ -288,6 +288,29 @@ def crop_recommendation(request):
 from .models import GovernmentScheme
 def government_schemes(request):
 
-    schemes = GovernmentScheme.objects.all()
+    # Admin schemes
+    admin_schemes = GovernmentScheme.objects.all()
 
-    return render(request, "core/schemes.html", {"schemes": schemes})
+    # API data
+    api_schemes = []
+
+    try:
+        url = f"https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key={settings.DATA_GOV_API_KEY}&format=json&limit=5"
+
+        response = requests.get(url, timeout=10)
+
+        if response.status_code == 200:
+            data = response.json()
+
+            for item in data.get("records", []):
+                api_schemes.append({
+                    "title": item.get("commodity"),
+                    "description": f"{item.get('state')} - ₹{item.get('modal_price')}",
+                })
+
+    except Exception as e:
+        print("API error:", e)
+    return render(request, "core/schemes.html", {
+        "admin_schemes": admin_schemes,
+        "api_schemes": api_schemes
+    })
