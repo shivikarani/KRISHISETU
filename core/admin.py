@@ -7,3 +7,8 @@ admin.site.register(Article)
 from .models import CropRecommendation
 
 admin.site.register(CropRecommendation)
+
+
+from .models import GovernmentScheme
+
+admin.site.register(GovernmentScheme)

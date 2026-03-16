@@ -284,3 +284,10 @@ def crop_recommendation(request):
         form = CropRecommendationForm()
 
     return render(request, "core/crop_recommendation.html", {"form": form, "result": result})
+
+from .models import GovernmentScheme
+def government_schemes(request):
+
+    schemes = GovernmentScheme.objects.all()
+
+    return render(request, "core/schemes.html", {"schemes": schemes})

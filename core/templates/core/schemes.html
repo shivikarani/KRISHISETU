@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<h2>Government Schemes for Farmers</h2>
+
+{% for scheme in schemes %}
+
+<div>
+
+<h3>{{ scheme.title }}</h3>
+
+<p>{{ scheme.description }}</p>
+
+<p><strong>Eligibility:</strong> {{ scheme.eligibility }}</p>
+
+<a href="{{ scheme.link }}" target="_blank">Official Website</a>
+
+</div>
+
+<hr>
+
+{% endfor %}
+
+{% endblock %}
