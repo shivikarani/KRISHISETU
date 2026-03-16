@@ -46,3 +46,12 @@ class CropRecommendationForm(forms.Form):
     temperature = forms.FloatField()
     humidity = forms.FloatField()
     rainfall = forms.FloatField()
+
+
+
+from .models import UserProfile
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        exclude = ['user']

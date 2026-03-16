@@ -1,0 +1,86 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<style>
+.profile-container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 12px;
+    background: #f9f9f9;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.profile-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-container label {
+    font-weight: 600;
+}
+
+.profile-container input,
+.profile-container select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.save-btn {
+    width: 100%;
+    padding: 10px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.save-btn:hover {
+    background: #218838;
+}
+
+.success-msg {
+    text-align: center;
+    color: green;
+    margin-bottom: 15px;
+}
+</style>
+
+<div class="profile-container">
+
+    <h2>👩‍🌾 Farmer Profile</h2>
+
+    <!-- Success message -->
+    {% if messages %}
+        {% for message in messages %}
+            <p class="success-msg">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <label>{{ field.label }}</label>
+            {{ field }}
+
+            {% if field.errors %}
+                <div style="color:red; font-size: 14px;">
+                    {{ field.errors }}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <button type="submit" class="save-btn">💾 Save Profile</button>
+    </form>
+
+</div>
+
+{% endblock %}

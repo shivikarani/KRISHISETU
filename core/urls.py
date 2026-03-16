@@ -17,5 +17,6 @@ urlpatterns = [
     path('notifications/', views.notifications_view, name='notifications'),
     path('api/market-prices/', views.market_prices, name='market_prices'),
     path('crop-recommendation/', views.crop_recommendation, name='crop_recommendation'),
-    path('schemes/', views.government_schemes, name='schemes')
+    path('schemes/', views.government_schemes, name='schemes'),
+    path("profile/", views.profile, name="profile"),
 ]

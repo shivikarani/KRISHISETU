@@ -124,3 +124,20 @@ class GovernmentScheme(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    state = models.CharField(max_length=100, blank=True, default="")
+    district = models.CharField(max_length=100, blank=True, default="")
+    village = models.CharField(max_length=100, blank=True, default="")
+
+    crop_type = models.CharField(max_length=100, blank=True, default="")
+    land_size = models.FloatField(null=True, blank=True)
+
+    preferred_language = models.CharField(max_length=50, blank=True, default="")
+
+    def __str__(self):
+        return self.user.username

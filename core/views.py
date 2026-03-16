@@ -314,3 +314,22 @@ def government_schemes(request):
         "admin_schemes": admin_schemes,
         "api_schemes": api_schemes
     })
+
+
+from .models import UserProfile
+from .forms import ProfileForm
+
+def profile(request):
+
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == "POST":
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Profile updated successfully ✅")
+            return redirect('dashboard')    # 🔥 IMPORTANT
+    else:
+        form = ProfileForm(instance=profile)
+
+    return render(request, "core/profile.html", {"form": form})
