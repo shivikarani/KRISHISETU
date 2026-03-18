@@ -6,7 +6,8 @@ from .models import Query, ExpertResponse
 import requests
 from django.conf import settings
 def home(request):
-    return render(request, 'core/home.html')
+    schemes = GovernmentScheme.objects.all()
+    return render(request, "core/home.html", {"schemes": schemes})
 
 
 from django.shortcuts import render, redirect

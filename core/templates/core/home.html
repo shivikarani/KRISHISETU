@@ -1,6 +1,97 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-<h2>Welcome to KrishiSetu</h2>
-<p>Your trusted agricultural advisory platform.</p>
+
+<style>
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                url('https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad');
+    background-size: cover;
+    color: white;
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 20px;
+}
+
+.btn-main {
+    background: green;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.features {
+    padding: 50px;
+    text-align: center;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+</style>
+
+<!-- HERO -->
+<div class="hero" width="100%">
+    <h1>🌾 KrishiSetu</h1>
+    <p>Empowering Farmers with Smart Technology</p>
+
+    <a href="/submit-query/" class="btn-main">Ask Question</a>
+    <a href="/schemes/" class="btn-main">View Schemes</a>
+</div>
+
+<!-- FEATURES -->
+<div class="features">
+    <h2>Our Services</h2>
+
+    <div style="display:flex; justify-content:center; flex-wrap:wrap;">
+        
+        <div class="card">
+            <h3>🌱 Crop Advisory</h3>
+            <p>Ask experts about your crop issues</p>
+        </div>
+
+        <div class="card">
+            <h3>🦠 Disease Detection</h3>
+            <p>Upload leaf image and detect disease</p>
+        </div>
+
+        <div class="card">
+            <h3>🌦 Weather Updates</h3>
+            <p>Get weather alerts for your area</p>
+        </div>
+
+        <div class="card">
+            <h3>📜 Govt Schemes</h3>
+            <p>Explore latest government schemes</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- SCHEMES PREVIEW -->
+<div class="features">
+    <h2>Latest Schemes</h2>
+
+    {% for scheme in schemes|slice:":3" %}
+        <div class="card">
+            <h3>{{ scheme.name }}</h3>
+            <p>{{ scheme.description|truncatewords:20 }}</p>
+        </div>
+    {% endfor %}
+
+</div>
+
 {% endblock %}
