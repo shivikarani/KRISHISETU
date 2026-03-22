@@ -35,6 +35,12 @@
     <p>{{ advisory }}</p>
 </div>
 {% endif %}
+
+
+<a href="/chatbot/" class="chatbot-btn">
+    🤖
+</a>
+
 <a href="{% url 'crop_recommendation' %}">Crop Recommendation</a>
 <a href="{% url 'schemes' %}">Government Schemes</a>
 <div class="market-section">
@@ -72,6 +78,7 @@
 </table>
 
 </div>
+
 
 <script src="{% static 'js/market.js' %}"></script>
 {% endblock %}
