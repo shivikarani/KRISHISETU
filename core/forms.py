@@ -60,7 +60,18 @@ class ProfileForm(forms.ModelForm):
 
 from .models import DiseaseDetection
 
+
+CROP_CHOICES = [
+    ('apple', 'Apple'),
+    ('tomato', 'Tomato'),
+    ('potato', 'Potato'),
+    ('corn', 'Corn'),
+]
+
 class DiseaseForm(forms.ModelForm):
+    crop = forms.ChoiceField(choices=CROP_CHOICES)
+
     class Meta:
         model = DiseaseDetection
-        fields = ['image']
+        fields = ['image', 'crop']
+

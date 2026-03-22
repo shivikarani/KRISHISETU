@@ -1,20 +1,25 @@
 {% extends 'core/base.html' %}
-
+{% load static %}
 {% block content %}
 
-<h2>🌿 Plant Disease Detection</h2>
-
 <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Upload & Detect</button>
-</form>
+  {% csrf_token %}
 
-<hr>
+  <label>Select Crop:</label>
+  {{ form.crop }}
+
+  <label>Upload Image:</label>
+  {{ form.image }}
+
+  <button type="submit">Detect Disease</button>
+</form>
+{% if obj %}
+    <h3>Uploaded Image:</h3>
+    <img src="{{ obj.image.url }}" width="250">
+{% endif %}
 
 {% if result %}
-    <h3>🧠 Result:</h3>
-    <p>{{ result }}</p>
+  <h2 style="color: green;">{{ result }}</h2>
 {% endif %}
 
 {% endblock %}

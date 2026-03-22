@@ -146,7 +146,5 @@ class UserProfile(models.Model):
 
 class DiseaseDetection(models.Model):
     image = models.ImageField(upload_to='diseases/')
+    crop = models.CharField(max_length=50)   # 🔥 ADD THIS
     result = models.TextField(blank=True)
-
-    def __str__(self):
-        return self.result or "No result"

@@ -5,6 +5,7 @@ from .models import Article, Category
 from .models import Query, ExpertResponse
 import requests
 from django.conf import settings
+from .ml_model.predict import predict_disease
 def home(request):
     schemes = GovernmentScheme.objects.all()
     return render(request, "core/home.html", {"schemes": schemes})
@@ -373,18 +374,33 @@ def search(request):
 import requests
 from .forms import DiseaseForm
 
+from .ml_model.predict import predict_disease
+
 def detect_disease(request):
 
     result = None
+    
 
     if request.method == "POST":
         form = DiseaseForm(request.POST, request.FILES)
+        print("FORM VALID:", form.is_valid())
+        print("FILES:", request.FILES)
 
         if form.is_valid():
             obj = form.save()
 
-            # 🔥 Fake AI logic (for now)
-            result = "Possible Disease: Leaf Spot\nSolution: Use fungicide spray"
+            image_path = obj.image.path
+            crop = form.cleaned_data['crop']
+
+            try:
+                prediction = predict_disease(image_path, crop)
+
+                result = f"Disease: {prediction}"
+
+            except Exception as e:
+                
+                print("ERROR:", e)   # 🔥 important
+                result = str(e)
 
             obj.result = result
             obj.save()
@@ -392,4 +408,8 @@ def detect_disease(request):
     else:
         form = DiseaseForm()
 
-    return render(request, "core/disease.html", {"form": form, "result": result})
+    return render(request, "core/disease.html", {
+    "form": form,
+    "result": result,
+    "obj": obj if request.method == "POST" and form.is_valid() else None
+    })

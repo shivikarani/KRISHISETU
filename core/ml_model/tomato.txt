@@ -1,0 +1,7 @@
+Tomato Healthy
+Tomato Leaf Mold
+Tomato Early Blight
+Tomato Late Blight
+Tomato Bacterial Spot
+Tomato Septoria Leaf Spot
+Tomato Spider Mites
