@@ -9,12 +9,33 @@ class FarmerRegistrationForm(UserCreationForm):
     district = forms.CharField(max_length=100)
     village = forms.CharField(max_length=100)
     crop_types = forms.CharField(max_length=200)
-    land_size = forms.FloatField()
+
+    # ✅ FIXED LAND SIZE (no spinner)
+    land_size = forms.FloatField(
+        widget=forms.NumberInput(attrs={
+            'class': 'no-spinner',
+            'placeholder': 'Enter land size',
+            'step': 'any'
+        })
+    )
+
+    # ✅ NEW UNIT FIELD
+    LAND_UNITS = [
+        ('acre', 'Acre'),
+        ('hectare', 'Hectare'),
+    ]
+    land_unit = forms.ChoiceField(choices=LAND_UNITS)
+
     preferred_language = forms.CharField(max_length=50)
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2', 'state', 'district', 'village', 'crop_types', 'land_size', 'preferred_language']
+        fields = [
+            'username', 'email', 'password1', 'password2',
+            'state', 'district', 'village',
+            'crop_types', 'land_size', 'land_unit',  # ✅ added
+            'preferred_language'
+        ]
 
 
         # query submission form
