@@ -148,3 +148,29 @@ class DiseaseDetection(models.Model):
     image = models.ImageField(upload_to='diseases/')
     crop = models.CharField(max_length=50)   # 🔥 ADD THIS
     result = models.TextField(blank=True)
+
+
+
+
+from django.contrib.auth.models import User
+
+class ExpertProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    qualification = models.CharField(max_length=200)
+    experience_years = models.IntegerField()
+    is_approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
+    
+
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.contrib.auth.models import Group
+
+@receiver(post_save, sender=ExpertProfile)
+def add_user_to_expert_group(sender, instance, **kwargs):
+    if instance.is_approved:
+        group, created = Group.objects.get_or_create(name='Expert')
+        instance.user.groups.add(group)

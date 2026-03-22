@@ -19,3 +19,8 @@ admin.site.register(GovernmentScheme)
 from .models import DiseaseDetection
 
 admin.site.register(DiseaseDetection)
+
+
+from .models import ExpertProfile
+
+admin.site.register(ExpertProfile)

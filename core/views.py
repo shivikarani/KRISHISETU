@@ -41,10 +41,7 @@ def login_view(request):
             login(request, user)
 
             # Redirect based on role
-            if user.groups.filter(name='Expert').exists():
-                return redirect('expert_dashboard')
-            else:
-                return redirect('dashboard')
+            return redirect_user_dashboard(request)
 
         else:
             messages.error(request, 'Invalid username or password')
@@ -172,9 +169,13 @@ def knowledge_base(request):
 
 from django.contrib.auth.decorators import user_passes_test
 
-def is_expert(user):
-    return user.groups.filter(name='Expert').exists()
 
+def is_expert(user):
+    return (
+        user.groups.filter(name='Expert').exists() and
+        hasattr(user, 'expertprofile') and
+        user.expertprofile.is_approved
+    )
 @user_passes_test(is_expert, login_url='login')
 def expert_dashboard(request):
     queries = Query.objects.all().order_by('-created_at')
@@ -413,3 +414,51 @@ def detect_disease(request):
     "result": result,
     "obj": obj if request.method == "POST" and form.is_valid() else None
     })
+
+
+
+from django.contrib.auth.models import Group
+from .forms import ExpertRegistrationForm
+
+from .models import ExpertProfile
+
+def expert_register(request):
+    if request.method == 'POST':
+        form = ExpertRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+
+            # Create Expert Profile (NOT approved yet)
+            ExpertProfile.objects.create(
+                user=user,
+                qualification=form.cleaned_data['qualification'],
+                experience_years=form.cleaned_data['experience_years'],
+                is_approved=False
+            )
+
+            return render(request, 'core/expert_pending.html')
+    else:
+        form = ExpertRegistrationForm()
+
+    return render(request, 'core/expert_register.html', {'form': form})
+
+
+
+from django.shortcuts import redirect
+
+def redirect_user_dashboard(request):
+    user = request.user
+
+    # If user applied as expert but NOT approved
+    if hasattr(user, 'expertprofile'):
+        if not user.expertprofile.is_approved:
+            return render(request, 'core/expert_pending.html')
+
+    # If approved expert
+    if user.groups.filter(name='Expert').exists():
+        return redirect('expert_dashboard')
+
+    # Default → farmer
+    return redirect('dashboard')
