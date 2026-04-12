@@ -203,5 +203,10 @@ nav a:hover {
     border-left: 5px solid #2e7d32;
     border-radius: 8px;
 }
-
+#google_translate_element select {
+    padding: 4px 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
 

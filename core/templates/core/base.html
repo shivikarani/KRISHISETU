@@ -32,6 +32,7 @@
                 {% endif %}
             </a>
             <a href="{% url 'logout' %}">Logout</a>
+            
         {% endif %}
         
 
@@ -41,12 +42,14 @@
         <a href="{% url 'register' %}">Farmer Registration</a>
         <a href="{% url 'expert_register' %}">Expert Registration</a>
         <a href="{% url 'knowledge_base' %}">Knowledge Base</a>
+        
 
     {% endif %}
     <form method="GET" action="/search/" style="display:flex; gap:5px;">
     <input type="text" name="q" placeholder="Search crops, schemes..." required>
     <button type="submit">🔍</button>
 </form>
+<div id="google_translate_element" ></div>
 </nav>
     </header>
     <main>
@@ -71,6 +74,19 @@
         </p>
     </div>
 </footer>
+
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'en,hi,mr,gu,pa,te,ta,kn,bn',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element');
+}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
