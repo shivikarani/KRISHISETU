@@ -120,10 +120,16 @@ def submit_query(request):
 
 @login_required(login_url='login')
 def view_queries(request):
-    # Fetch queries submitted by this farmer, newest first
-    queries = request.user.query_set.all().order_by('-created_at')
-    return render(request, 'core/view_queries.html', {'queries': queries})
+    queries = Query.objects.filter(farmer=request.user).order_by('-created_at')
 
+    responses = ExpertResponse.objects.filter(
+        query__in=queries
+    ).select_related('query')
+
+    return render(request, 'core/view_queries.html', {
+        'queries': queries,
+        'responses': responses
+    })
 
 
 

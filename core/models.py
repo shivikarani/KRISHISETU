@@ -174,3 +174,4 @@ def add_user_to_expert_group(sender, instance, **kwargs):
     if instance.is_approved:
         group, created = Group.objects.get_or_create(name='Expert')
         instance.user.groups.add(group)
+

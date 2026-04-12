@@ -18,11 +18,20 @@
     {% if query.is_answered %}
         <hr>
         <h4>Expert Response:</h4>
-        <p>{{ query.response_text }}</p>
 
-        {% if query.response_file %}
-            <a href="{{ query.response_file.url }}">Download Attachment</a>
-        {% endif %}
+        {% for response in query.expertresponse_set.all %}
+            
+            <p>{{ response.response_text }}</p>
+
+            {% if response.response_voice %}
+                <p><strong>Voice Reply:</strong></p>
+                <audio controls>
+                    <source src="{{ response.response_voice.url }}">
+                </audio>
+            {% endif %}
+
+        {% endfor %}
+
     {% else %}
         <p><em>No response yet.</em></p>
     {% endif %}

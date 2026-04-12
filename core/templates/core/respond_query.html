@@ -1,4 +1,6 @@
 {% extends 'core/base.html' %}
+
+{% comment %} {% extends 'core/base.html' %}
 {% block content %}
 
 <h2>Respond to Query</h2>
@@ -9,6 +11,14 @@
 {% if query.image %}
     <img src="{{ query.image.url }}" width="200">
 {% endif %}
+{% if query.voice_file %}
+    <p><strong>Farmer Voice:</strong></p>
+    <audio controls>
+        <source src="{{ query.voice_file.url }}">
+    </audio>
+{% else %}
+    <p>No voice message provided.</p>
+{% endif %}
 
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
@@ -16,6 +26,53 @@
     <br><br>
     <input type="file" name="response_voice" accept="audio/*">
     <br><br>
+    <button type="submit">Submit Response</button>
+</form>
+
+{% endblock %} {% endcomment %}
+
+
+{% block content %}
+
+<h2>Respond to Query</h2>
+
+<h3>{{ query.title }}</h3>
+
+<p><strong>Description:</strong> {{ query.description }}</p>
+
+{% if query.image %}
+    <p><strong>Farmer Image:</strong></p>
+    <img src="{{ query.image.url }}" width="250">
+{% endif %}
+
+<hr>
+
+{% if query.voice_file %}
+    <p><strong>Farmer Voice Message:</strong></p>
+    <audio controls>
+        <source src="{{ query.voice_file.url }}">
+    </audio>
+{% else %}
+    <p>No voice message provided by farmer.</p>
+{% endif %}
+
+<hr>
+
+<h3>Send Your Response</h3>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <textarea name="response_text" rows="5" required
+              placeholder="Write your response here..."></textarea>
+
+    <br><br>
+
+    <label>Upload voice response (optional):</label>
+    <input type="file" name="response_voice" accept="audio/*">
+
+    <br><br>
+
     <button type="submit">Submit Response</button>
 </form>
 
