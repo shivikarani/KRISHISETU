@@ -1,32 +1,37 @@
 {% extends 'core/base.html' %}
 {% block content %}
 
-<h2>Expert Dashboard</h2>
+<h2 style="text-align:center;">👨‍🔬 Expert Dashboard</h2>
 
-<table border="1" width="100%">
-    <tr>
-        <th>Title</th>
-        <th>Farmer</th>
-        <th>Status</th>
-        <th>Date</th>
-        <th>Action</th>
-    </tr>
+{% for query in queries %}
+<div style="border:1px solid #ccc; padding:20px; margin:20px; border-radius:10px; background:#f9f9f9;">
 
-    {% for query in queries %}
-    <tr>
-        <td>{{ query.title }}</td>
-        <td>{{ query.farmer.username }}</td>
-        <td>{{ query.status }}</td>
-        <td>{{ query.created_at }}</td>
-        <td>
-            <a href="{% url 'respond_query' query.id %}">Respond</a>
-        </td>
-    </tr>
-    {% empty %}
-    <tr>
-        <td colspan="5">No Queries Available</td>
-    </tr>
-    {% endfor %}
-</table>
+    <h3 style="color:#2e7d32;">{{ query.title }}</h3>
+
+    <p><strong>Description:</strong> {{ query.description }}</p>
+    <p><strong>Status:</strong> {{ query.status }}</p>
+
+    {% if query.image %}
+        <img src="{{ query.image.url }}" width="200" style="border-radius:8px;">
+    {% endif %}
+
+    {% if query.voice_file %}
+        <p><strong>🎤 Farmer Voice:</strong></p>
+        <audio controls>
+            <source src="{{ query.voice_file.url }}">
+        </audio>
+    {% endif %}
+
+    <br><br>
+
+    <a href="{% url 'respond_query' query.id %}" 
+       style="padding:8px 15px; background:#2e7d32; color:white; border-radius:6px; text-decoration:none;">
+       ✍️ Respond
+    </a>
+
+</div>
+{% empty %}
+<p>No queries available</p>
+{% endfor %}
 
 {% endblock %}
