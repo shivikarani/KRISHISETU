@@ -37,12 +37,57 @@
 {% endif %}
 
 
-<a href="/chatbot/" class="chatbot-btn">
+{% comment %} <a href="/chatbot/" class="chatbot-btn">
     🤖
-</a>
+</a> {% endcomment %}
 
-<a href="{% url 'crop_recommendation' %}">Crop Recommendation</a>
-<a href="{% url 'schemes' %}">Government Schemes</a>
+<div style="display:flex; gap:20px; margin-top:20px; width:100%;">
+
+    <!-- 🌱 Crop Recommendation Card -->
+    <a href="{% url 'crop_recommendation' %}" style="text-decoration:none; flex:1;">
+        <div style="
+            width:100%;
+            padding:25px;
+            background:#e8f5e9;
+            border-radius:12px;
+            text-align:center;
+            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+            transition:0.3s;
+        " 
+        onmouseover="this.style.transform='scale(1.03)'"
+        onmouseout="this.style.transform='scale(1)'">
+
+            <h3>🌱 Crop Recommendation</h3>
+            <p style="font-size:14px; color:#555;">
+                Get best crop based on soil & weather
+            </p>
+
+        </div>
+    </a>
+
+    <!-- 📜 Government Schemes Card -->
+    <a href="{% url 'schemes' %}" style="text-decoration:none; flex:1;">
+        <div style="
+            width:100%;
+            padding:25px;
+            background:#e8f5e9;   /* ✅ SAME GREEN COLOR */
+            border-radius:12px;
+            text-align:center;
+            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+            transition:0.3s;
+        "
+        onmouseover="this.style.transform='scale(1.03)'"
+        onmouseout="this.style.transform='scale(1)'">
+
+            <h3>📜 Government Schemes</h3>
+            <p style="font-size:14px; color:#555;">
+                Explore govt schemes & benefits
+            </p>
+
+        </div>
+    </a>
+
+</div>
 <div class="market-section">
 
 <h3>🌾 Latest Mandi Prices</h3>
