@@ -64,9 +64,19 @@ class CropRecommendationForm(forms.Form):
 
     soil_type = forms.ChoiceField(choices=SOIL_TYPES)
 
-    temperature = forms.FloatField()
-    humidity = forms.FloatField()
-    rainfall = forms.FloatField()
+    temperature = forms.FloatField(label="Temperature")
+    temp_unit = forms.ChoiceField(choices=[
+        ('C', 'Celsius'),
+        ('F', 'Fahrenheit')
+    ])
+
+    humidity = forms.FloatField(label="Humidity (%)")
+
+    rainfall = forms.FloatField(label="Rainfall")
+    rain_unit = forms.ChoiceField(choices=[
+        ('mm', 'mm'),
+        ('cm', 'cm')
+    ])
 
 
 

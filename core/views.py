@@ -267,32 +267,42 @@ def crop_recommendation(request):
     result = None
 
     if request.method == "POST":
-
         form = CropRecommendationForm(request.POST)
 
         if form.is_valid():
 
             soil = form.cleaned_data["soil_type"]
             temp = form.cleaned_data["temperature"]
+            temp_unit = form.cleaned_data["temp_unit"]
             humidity = form.cleaned_data["humidity"]
             rainfall = form.cleaned_data["rainfall"]
+            rain_unit = form.cleaned_data["rain_unit"]
 
+            # ✅ convert temperature to Celsius
+            if temp_unit == 'F':
+                temp = (temp - 32) * 5/9
+
+            # ✅ convert rainfall to mm
+            if rain_unit == 'cm':
+                rainfall = rainfall * 10
+
+            # logic
             if soil == "clay" and rainfall > 200:
                 result = "Rice"
-
             elif soil == "loamy" and temp > 20:
                 result = "Wheat"
-
             elif soil == "sandy":
                 result = "Millet"
-
             else:
                 result = "Maize"
 
     else:
         form = CropRecommendationForm()
 
-    return render(request, "core/crop_recommendation.html", {"form": form, "result": result})
+    return render(request, "core/crop_recommendation.html", {
+        "form": form,
+        "result": result
+    })
 
 from .models import GovernmentScheme
 def government_schemes(request):

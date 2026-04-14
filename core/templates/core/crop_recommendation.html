@@ -4,19 +4,39 @@
 
 <h2>🌱 Crop Recommendation System</h2>
 
-<form method="POST">
+<form method="POST" style="max-width:500px; margin:auto;">
 {% csrf_token %}
 
-{{ form.as_p }}
+<label>Soil Type:</label>
+{{ form.soil_type }}
+
+<br><br>
+
+<label>Temperature:</label><br>
+{{ form.temperature }}
+{{ form.temp_unit }}
+
+<br><br>
+
+<label>Humidity (%):</label><br>
+{{ form.humidity }}
+
+<br><br>
+
+<label>Rainfall:</label><br>
+{{ form.rainfall }}
+{{ form.rain_unit }}
+
+<br><br>
 
 <button type="submit">Get Recommendation</button>
 
 </form>
 
 {% if result %}
-
-<h3>Recommended Crop: {{ result }}</h3>
-
+    <h3 style="text-align:center; color:green;">
+        Recommended Crop: {{ result }}
+    </h3>
 {% endif %}
 
 {% endblock %}
