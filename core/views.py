@@ -480,3 +480,48 @@ def redirect_user_dashboard(request):
 
     # Default → farmer
     return redirect('dashboard')
+
+
+from .forms import SoilAnalysisForm
+from .models import SoilAnalysis
+
+@login_required(login_url='login')
+def soil_analysis(request):
+
+    result = None
+
+    if request.method == "POST":
+        form = SoilAnalysisForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.user = request.user
+
+            lat = obj.latitude
+            lon = obj.longitude
+
+            # 🔥 SIMPLE LOGIC (replace later with API/ML)
+            if lat > 25:
+                soil = "Loamy Soil"
+                crop = "Wheat"
+                fertilizer = "Use Nitrogen-rich fertilizer"
+            else:
+                soil = "Sandy Soil"
+                crop = "Millet"
+                fertilizer = "Use Organic Compost"
+
+            obj.detected_soil = soil
+            obj.recommended_crop = crop
+            obj.fertilizer_suggestion = fertilizer
+
+            obj.save()
+
+            result = obj
+
+    else:
+        form = SoilAnalysisForm()
+
+    return render(request, "core/soil_analysis.html", {
+        "form": form,
+        "result": result
+    })

@@ -175,3 +175,24 @@ def add_user_to_expert_group(sender, instance, **kwargs):
         group, created = Group.objects.get_or_create(name='Expert')
         instance.user.groups.add(group)
 
+
+
+class SoilAnalysis(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+
+    soil_image = models.ImageField(upload_to='soil_images/')
+
+    detected_soil = models.CharField(max_length=100, blank=True)
+    recommended_crop = models.CharField(max_length=100, blank=True)
+    fertilizer_suggestion = models.TextField(blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Soil Analysis - {self.user.username}"
+    
+
+    

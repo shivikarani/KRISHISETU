@@ -22,4 +22,5 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('disease-detection/', views.detect_disease, name='disease'),
     path('expert-register/', views.expert_register, name='expert_register'),
+    path('soil-analysis/', views.soil_analysis, name='soil_analysis'),
 ]

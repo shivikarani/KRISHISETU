@@ -140,3 +140,14 @@ class ExpertRegistrationForm(forms.ModelForm):
         if cleaned_data.get("password") != cleaned_data.get("confirm_password"):
             raise forms.ValidationError("Passwords do not match")
         return cleaned_data
+
+
+from .models import SoilAnalysis
+
+class SoilAnalysisForm(forms.ModelForm):
+    class Meta:
+        model = SoilAnalysis
+        fields = ['latitude', 'longitude', 'soil_image']
+
+        
+

@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+<h2>🌱 Smart Soil Analysis</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <label>Latitude:</label>
+    {{ form.latitude }}
+
+    <label>Longitude:</label>
+    {{ form.longitude }}
+    <button type="button" onclick="getLocation()">📍 Auto Detect Location</button>
+
+    <label>Upload Soil Image:</label>
+    {{ form.soil_image }}
+
+    <br><br>
+    <button type="submit">Analyze Soil</button>
+</form>
+
+{% if result %}
+    <hr>
+    <h3>🔍 Results:</h3>
+
+    <p><strong>Soil Type:</strong> {{ result.detected_soil }}</p>
+    <p><strong>Recommended Crop:</strong> {{ result.recommended_crop }}</p>
+    <p><strong>Fertilizer:</strong> {{ result.fertilizer_suggestion }}</p>
+
+    <img src="{{ result.soil_image.url }}" width="250">
+{% endif %}
+
+
+<script>
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            document.getElementById("id_latitude").value = position.coords.latitude;
+            document.getElementById("id_longitude").value = position.coords.longitude;
+        });
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+</script>
+
+{% endblock %}
