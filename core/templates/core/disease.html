@@ -1,25 +1,38 @@
 {% extends 'core/base.html' %}
-{% load static %}
 {% block content %}
 
+<h2>🌿 Disease Detection</h2>
+
 <form method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
+    {% csrf_token %}
 
-  <label>Select Crop:</label>
-  {{ form.crop }}
+    <label>Select Crop:</label>
+    {{ form.crop }}
 
-  <label>Upload Image:</label>
-  {{ form.image }}
+    <label>Upload Image:</label>
+    {{ form.image }}
 
-  <button type="submit">Detect Disease</button>
+    <button type="submit">Detect Disease</button>
 </form>
+
+<!-- ✅ ERROR DISPLAY (NO WHITE SCREEN) -->
+{% if form.errors %}
+    <div style="color:red; margin-top:10px;">
+        {{ form.errors }}
+    </div>
+{% endif %}
+
+<!-- Uploaded Image -->
 {% if obj %}
     <h3>Uploaded Image:</h3>
     <img src="{{ obj.image.url }}" width="250">
 {% endif %}
 
+<!-- Result -->
 {% if result %}
-  <h2 style="color: green;">{{ result }}</h2>
+    <h3 style="color:green; margin-top:15px;">
+        {{ result }}
+    </h3>
 {% endif %}
 
 {% endblock %}

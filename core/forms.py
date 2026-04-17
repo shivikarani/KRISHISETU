@@ -106,6 +106,20 @@ class DiseaseForm(forms.ModelForm):
         model = DiseaseDetection
         fields = ['image', 'crop']
 
+    def clean_image(self):
+        image = self.cleaned_data.get('image')
+
+        if image:
+            # ✅ File type check
+            if not image.name.endswith(('.jpg', '.jpeg')):
+                raise forms.ValidationError("Only JPG/JPEG images allowed")
+
+            # ✅ Optional size limit (5MB)
+            if image.size > 5 * 1024 * 1024:
+                raise forms.ValidationError("Image size should be less than 5MB")
+
+        return image
+
 
 
 from django import forms

@@ -24,13 +24,17 @@ def load_labels(path):
     with open(path, "r") as f:
         return [line.strip() for line in f.readlines()]
 
-
+from tensorflow.keras.models import load_model
 def predict_disease(img_path, crop):
 
     if crop not in MODEL_PATHS:
         return "Model not available for this crop"
 
-    model = tf.keras.models.load_model(MODEL_PATHS[crop], compile=False)
+    model = load_model(
+    MODEL_PATHS[crop],
+    compile=False,
+    safe_mode=False
+)
     labels = load_labels(LABEL_PATHS[crop])
 
     img = load_img(img_path, target_size=(256,256))

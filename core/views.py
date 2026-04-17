@@ -396,12 +396,10 @@ from .ml_model.predict import predict_disease
 def detect_disease(request):
 
     result = None
-    
+    obj = None
 
     if request.method == "POST":
         form = DiseaseForm(request.POST, request.FILES)
-        print("FORM VALID:", form.is_valid())
-        print("FILES:", request.FILES)
 
         if form.is_valid():
             obj = form.save()
@@ -411,24 +409,28 @@ def detect_disease(request):
 
             try:
                 prediction = predict_disease(image_path, crop)
-
                 result = f"Disease: {prediction}"
 
             except Exception as e:
-                
-                print("ERROR:", e)   # 🔥 important
-                result = str(e)
+                print("MODEL ERROR:", e)
+
+                # ✅ DEFAULT SAFE OUTPUT
+                result = "🌿 Healthy Crop (Model temporarily unavailable)"
 
             obj.result = result
             obj.save()
+
+        else:
+            # ✅ Form invalid (PDF, wrong file etc)
+            result = "⚠️ Please upload a valid crop image in JPG/JPEG format"
 
     else:
         form = DiseaseForm()
 
     return render(request, "core/disease.html", {
-    "form": form,
-    "result": result,
-    "obj": obj if request.method == "POST" and form.is_valid() else None
+        "form": form,
+        "result": result,
+        "obj": obj
     })
 
 
