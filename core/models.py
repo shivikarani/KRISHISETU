@@ -136,6 +136,12 @@ class UserProfile(models.Model):
 
     crop_type = models.CharField(max_length=100, blank=True, default="")
     land_size = models.FloatField(null=True, blank=True)
+    LAND_UNITS = [
+        ('acre', 'Acre'),
+        ('hectare', 'Hectare'),
+    ]
+
+    land_unit = models.CharField(max_length=20, choices=LAND_UNITS, default='acre')
 
     preferred_language = models.CharField(max_length=50, blank=True, default="")
 
@@ -195,4 +201,15 @@ class SoilAnalysis(models.Model):
         return f"Soil Analysis - {self.user.username}"
     
 
+
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.contrib.auth.models import User
+
+@receiver(post_save, sender=User)
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        from .models import UserProfile   # 🔥 yahan import karo
+        UserProfile.objects.create(user=instance)
     
