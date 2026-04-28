@@ -531,3 +531,128 @@ def soil_analysis(request):
         "form": form,
         "result": result
     })
+
+
+
+def faq(request):
+    faqs = [
+
+        # BASIC USAGE
+        {
+            "question": "How to submit a query?",
+            "answer": "Go to Dashboard → Click on Submit Query → Fill details → Upload image or voice → Submit."
+        },
+        {
+            "question": "How can I contact an expert?",
+            "answer": "Submit your query and experts will respond with text or voice solution."
+        },
+        {
+            "question": "Can I send voice queries?",
+            "answer": "Yes, you can upload your voice recording while submitting a query."
+        },
+
+        # DISEASE DETECTION
+        {
+            "question": "How does disease detection work?",
+            "answer": "Upload a clear JPEG image of crop leaves and select the correct crop to detect disease."
+        },
+        {
+            "question": "Why am I not getting disease result?",
+            "answer": "Make sure image is clear, crop is selected correctly and image is in JPG/JPEG format."
+        },
+        {
+            "question": "Can I upload any image for disease detection?",
+            "answer": "No, only crop leaf images in JPEG format are supported."
+        },
+
+        # WEATHER
+        {
+            "question": "How to check weather for my location?",
+            "answer": "Enter your city name to get weather details."
+        },
+        # {
+        #     "question": "Can I check weather for village?",
+        #     "answer": "Yes, use 'Use My Location' button for accurate weather based on your location."
+        # },
+
+        # CROP RECOMMENDATION
+        {
+            "question": "How to get crop recommendation?",
+            "answer": "Enter soil type, temperature, humidity and rainfall to get best crop suggestion."
+        },
+        {
+            "question": "What if I don't know exact values?",
+            "answer": "You can estimate values or use weather data from dashboard."
+        },
+
+        # FARMING QUESTIONS
+        {
+            "question": "Which crop is best for my soil?",
+            "answer": "Use crop recommendation feature or ask expert by submitting a query."
+        },
+        {
+            "question": "How to increase crop yield?",
+            "answer": "Use proper fertilizers, irrigation, and follow expert advice."
+        },
+        {
+            "question": "Which fertilizer should I use?",
+            "answer": "Depends on crop and soil. You can ask expert or future soil module will help."
+        },
+        {
+            "question": "How to control pests?",
+            "answer": "Use recommended pesticides or consult expert for safe solutions."
+        },
+
+        # GOVERNMENT SCHEMES
+        {
+            "question": "Where can I find government schemes?",
+            "answer": "Go to Schemes section to view latest government schemes."
+        },
+        {
+            "question": "Are schemes updated regularly?",
+            "answer": "Yes, schemes are fetched from government APIs."
+        },
+
+        # NOTIFICATIONS
+        {
+            "question": "How will I know if expert replied?",
+            "answer": "You will get a notification in Notifications section."
+        },
+
+        # 👤 PROFILE
+        {
+            "question": "How to update my profile?",
+            "answer": "Click on Profile in navbar and update your details."
+        },
+        # {
+        #     "question": "Can I upload profile picture?",
+        #     "answer": "Yes, you can upload your profile image."
+        # },
+
+        # SEARCH & LANGUAGE
+        {
+            "question": "How to search information?",
+            "answer": "Use search bar to find crops, schemes and articles."
+        },
+        {
+            "question": "Can I change language?",
+            "answer": "Yes, use Google Translate option to change language."
+        },
+
+        # GENERAL ISSUES
+        {
+            "question": "Why is my image not uploading?",
+            "answer": "Make sure image is valid, not corrupted and in supported format."
+        },
+        {
+            "question": "Why is website not showing results?",
+            "answer": "Check internet connection or try refreshing page."
+        },
+        {
+            "question": "What should I do if something is not working?",
+            "answer": "Try refreshing page or contact support."
+        }
+
+    ]
+
+    return render(request, "core/faq.html", {"faqs": faqs})
