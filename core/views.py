@@ -372,8 +372,14 @@ def search(request):
 
     articles = []
     schemes = []
+    if query:
+        q = query.lower()
+
+        if "kidneybeans" in q:
+            query = "kidney beans"
 
     if query:
+        # Step 1: exact + partial match
         articles = Article.objects.filter(
             Q(title__icontains=query) |
             Q(content__icontains=query)
@@ -383,6 +389,18 @@ def search(request):
             Q(title__icontains=query) |
             Q(description__icontains=query)
         )
+
+        # Step 2: fallback (agar kuch nahi mila)
+        if not articles.exists():
+            articles = Article.objects.all()[:5]   # top 5
+
+        if not schemes.exists():
+            schemes = GovernmentScheme.objects.all()[:5]
+
+    else:
+        # Step 3: empty search → default data
+        articles = Article.objects.all()[:5]
+        schemes = GovernmentScheme.objects.all()[:5]
 
     context = {
         'query': query,

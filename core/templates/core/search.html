@@ -2,15 +2,33 @@
 
 {% block content %}
 
-<h2>🔍 Search Results for "{{ query }}"</h2>
+{% if query %}
+    <h2> Results for "{{ query }}"</h2>
+{% else %}
+    <h2>Recommended Results</h2>
+{% endif %}
 
 <hr>
 
+<!--  MESSAGE (fallback info) -->
+{% if query and not articles and not schemes %}
+    <p style="color:orange;">
+        No exact match found. Showing related results instead 👇
+    </p>
+{% endif %}
+
+<!-- ARTICLES -->
 <h3>📚 Articles</h3>
 
 {% if articles %}
     {% for article in articles %}
-        <div style="margin-bottom:15px; padding:10px; border:1px solid #ccc;">
+        <div style="
+            margin-bottom:15px;
+            padding:15px;
+            border-radius:10px;
+            background:#f9f9f9;
+            box-shadow:0 2px 6px rgba(0,0,0,0.1);
+        ">
             <h4>{{ article.title }}</h4>
             <p>{{ article.content|truncatewords:20 }}</p>
         </div>
@@ -21,11 +39,18 @@
 
 <hr>
 
+<!-- 🏛 SCHEMES -->
 <h3>🏛 Government Schemes</h3>
 
 {% if schemes %}
     {% for scheme in schemes %}
-        <div style="margin-bottom:15px; padding:10px; border:1px solid #ccc;">
+        <div style="
+            margin-bottom:15px;
+            padding:15px;
+            border-radius:10px;
+            background:#f1f8e9;
+            box-shadow:0 2px 6px rgba(0,0,0,0.1);
+        ">
             <h4>{{ scheme.title }}</h4>
             <p>{{ scheme.description|truncatewords:20 }}</p>
         </div>
