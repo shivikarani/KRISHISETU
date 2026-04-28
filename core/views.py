@@ -59,7 +59,7 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='login')
 def dashboard(request):
 
-    city = "Delhi"  # abhi static rakhenge, baad me dynamic karenge
+    city = request.GET.get('city', 'Delhi')
 
     api_key = settings.OPENWEATHER_API_KEY
     url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
@@ -71,11 +71,13 @@ def dashboard(request):
 
     if response.status_code == 200:
         weather_data = {
-            "city": city,
+            "city": data["name"],   # 🔥 IMPORTANT FIX
             "temperature": data["main"]["temp"],
             "humidity": data["main"]["humidity"],
             "description": data["weather"][0]["description"],
-            "icon": data["weather"][0]["icon"]
+            "icon": data["weather"][0]["icon"],
+            "wind": data["wind"]["speed"],          # 🔥 add
+            "pressure": data["main"]["pressure"]
         }
 
         advisory = ""
@@ -89,6 +91,10 @@ def dashboard(request):
                 advisory = "Low temperature! Protect crops from frost."
             else:
                 advisory = "Weather conditions are suitable for farming activities."
+
+    if response.status_code != 200:
+       weather_data = None
+       advisory = "⚠️ Please enter a valid city name"
 
     return render(request, 'core/dashboard.html', {
         "weather": weather_data,

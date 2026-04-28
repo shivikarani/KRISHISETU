@@ -18,15 +18,31 @@
         <a href="/profile/">Edit Profile</a>
     </div>
 </div>
+<!--  Weather Search -->
+<form method="GET" style="margin:20px 0; display:flex; gap:10px;">
+    <input 
+        type="text" 
+        name="city" 
+        placeholder="Enter city (e.g. Lucknow)" 
+        value="{{ city }}"
+        style="padding:8px; border-radius:6px; border:1px solid #ccc; width:250px;"
+        required
+    >
+    <button style="padding:8px 15px; background:#2e7d32; color:white; border:none; border-radius:6px;">
+        🔍 Get Weather
+    </button>
+</form>
 {% if weather %}
 <div class="weather-card">
-    <h3>Weather in {{ weather.city }}</h3>
+    <h3>📍 Weather in {{ weather.city }}</h3>
 
     <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png">
 
     <p><strong>Temperature:</strong> {{ weather.temperature }} °C</p>
     <p><strong>Humidity:</strong> {{ weather.humidity }}%</p>
     <p><strong>Condition:</strong> {{ weather.description }}</p>
+    <p><strong>Wind Speed:</strong> {{ weather.wind }} m/s</p>
+    <p><strong>Pressure:</strong> {{ weather.pressure }} hPa</p>
 </div>
 {% endif %}
 {% if advisory %}
