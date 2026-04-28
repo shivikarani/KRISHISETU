@@ -128,7 +128,7 @@ class GovernmentScheme(models.Model):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
     state = models.CharField(max_length=100, blank=True, default="")
     district = models.CharField(max_length=100, blank=True, default="")
