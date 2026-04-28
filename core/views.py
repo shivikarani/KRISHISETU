@@ -415,10 +415,10 @@ def detect_disease(request):
 
             try:
                 prediction = predict_disease(image_path, crop)
-                result = f"Disease: {prediction}"
+                result = prediction
 
             except Exception as e:
-                print("MODEL ERROR:", e)
+                result = "⚠️ Could not process image. Showing default result."
 
                 # ✅ DEFAULT SAFE OUTPUT
                 result = "🌿 Healthy Crop (Model temporarily unavailable)"
