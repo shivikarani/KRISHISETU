@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 {% block content %}
 
-<h2>🌱 Smart Soil Analysis</h2>
+<h2>Smart Soil Analysis</h2>
 
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
@@ -11,7 +11,7 @@
 
     <label>Longitude:</label>
     {{ form.longitude }}
-    <button type="button" onclick="getLocation()">📍 Auto Detect Location</button>
+    <button type="button" onclick="getLocation()">Auto Detect Location</button>
 
     <label>Upload Soil Image:</label>
     {{ form.soil_image }}
@@ -22,7 +22,7 @@
 
 {% if result %}
     <hr>
-    <h3>🔍 Results:</h3>
+    <h3>Results:</h3>
 
     <p><strong>Soil Type:</strong> {{ result.detected_soil }}</p>
     <p><strong>Recommended Crop:</strong> {{ result.recommended_crop }}</p>

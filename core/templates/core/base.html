@@ -107,19 +107,19 @@
 
     {% if user.groups.all.0.name == "Expert" %}
 
-        <!-- 👨‍🔬 EXPERT NAVBAR -->
+        <!--  EXPERT NAVBAR -->
         <a href="{% url 'expert_dashboard' %}">Expert Dashboard</a>
         <a href="{% url 'logout' %}">Logout</a>
 
     {% else %}
 
-        <!-- 👨‍🌾 FARMER NAVBAR -->
+        <!-- FARMER NAVBAR -->
         <a href="{% url 'dashboard' %}">Farmer Dashboard</a>
         <a href="{% url 'submit_query' %}">Submit Query</a>
         <a href="{% url 'view_queries' %}">My Queries</a>
         <a href="{% url 'knowledge_base' %}">Knowledge Base</a>
-        <a href="{% url 'disease' %}">🌿 Disease Detection</a>
-        <a href="{% url 'soil_analysis' %}">🌱 Soil Analysis</a>
+        <a href="{% url 'disease' %}"> Disease Detection</a>
+        <a href="{% url 'soil_analysis' %}">Soil Analysis</a>
         <a href="#contact-section">Contact Us</a>
 
         <a href="{% url 'notifications' %}">
@@ -131,7 +131,7 @@
 
         <a href="{% url 'logout' %}">Logout</a>
 
-        <!-- ✅ SEARCH BAR (ONLY FARMER) -->
+        <!-- SEARCH BAR (ONLY FARMER) -->
         <form method="GET" action="/search/" style="display:flex; gap:5px;">
             <input type="text" name="q" placeholder="Search crops, schemes..." required>
             <button type="submit">🔍</button>
@@ -141,13 +141,13 @@
 
 {% else %}
 
-    <!-- 👤 GUEST NAVBAR -->
+    <!-- GUEST NAVBAR -->
     <a href="{% url 'login' %}">Login</a>
     <a href="{% url 'register' %}">Farmer Registration</a>
     <a href="{% url 'expert_register' %}">Expert Registration</a>
     <a href="{% url 'knowledge_base' %}">Knowledge Base</a>
 
-    <!-- ✅ SEARCH BAR (GUEST) -->
+    <!-- SEARCH BAR (GUEST) -->
     <form method="GET" action="/search/" style="display:flex; gap:5px;">
         <input type="text" name="q" placeholder="Search crops, schemes..." required>
         <button type="submit">🔍</button>
@@ -157,7 +157,7 @@
 
 </nav>
 
-<!-- ✅ TRANSLATOR FOR ALL -->
+<!-- TRANSLATOR FOR ALL -->
 <div id="google_translate_element" style="margin:10px;"></div>
     </header>
     
@@ -166,7 +166,7 @@
     {% if messages %}
     {% for message in messages %}
         <div class="alert-success">
-            ✅ {{ message }}
+             {{ message }}
         </div>
     {% endfor %}
 {% endif %}
@@ -185,7 +185,7 @@
     <div class="contact-container">
 
         <h2 class="contact-title">
-            📞 Connect With Us
+            Connect With Us
         </h2>
 
         <form method="POST" action="{% url 'contact' %}">

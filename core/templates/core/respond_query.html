@@ -1,35 +1,6 @@
 {% extends 'core/base.html' %}
 
-{% comment %} {% extends 'core/base.html' %}
-{% block content %}
 
-<h2>Respond to Query</h2>
-
-<h3>{{ query.title }}</h3>
-<p><strong>Description:</strong> {{ query.description }}</p>
-
-{% if query.image %}
-    <img src="{{ query.image.url }}" width="200">
-{% endif %}
-{% if query.voice_file %}
-    <p><strong>Farmer Voice:</strong></p>
-    <audio controls>
-        <source src="{{ query.voice_file.url }}">
-    </audio>
-{% else %}
-    <p>No voice message provided.</p>
-{% endif %}
-
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <textarea name="response_text" rows="5" required></textarea>
-    <br><br>
-    <input type="file" name="response_voice" accept="audio/*">
-    <br><br>
-    <button type="submit">Submit Response</button>
-</form>
-
-{% endblock %} {% endcomment %}
 
 
 {% block content %}

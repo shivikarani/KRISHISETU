@@ -34,7 +34,7 @@
 </form>
 {% if weather %}
 <div class="weather-card">
-    <h3>📍 Weather in {{ weather.city }}</h3>
+    <h3> Weather in {{ weather.city }}</h3>
 
     <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png">
 
@@ -53,13 +53,11 @@
 {% endif %}
 
 
-{% comment %} <a href="/chatbot/" class="chatbot-btn">
-    🤖
-</a> {% endcomment %}
+
 
 <div style="display:flex; gap:20px; margin-top:20px; width:100%;">
 
-    <!-- 🌱 Crop Recommendation Card -->
+    <!-- Crop Recommendation Card -->
     <a href="{% url 'crop_recommendation' %}" style="text-decoration:none; flex:1;">
         <div style="
             width:100%;
@@ -73,7 +71,7 @@
         onmouseover="this.style.transform='scale(1.03)'"
         onmouseout="this.style.transform='scale(1)'">
 
-            <h3>🌱 Crop Recommendation</h3>
+            <h3> Crop Recommendation</h3>
             <p style="font-size:14px; color:#555;">
                 Get best crop based on soil & weather
             </p>
@@ -81,12 +79,12 @@
         </div>
     </a>
 
-    <!-- 📜 Government Schemes Card -->
+    <!-- Government Schemes Card -->
     <a href="{% url 'schemes' %}" style="text-decoration:none; flex:1;">
         <div style="
             width:100%;
             padding:25px;
-            background:#e8f5e9;   /* ✅ SAME GREEN COLOR */
+            background:#e8f5e9;   /* SAME GREEN COLOR */
             border-radius:12px;
             text-align:center;
             box-shadow:0 4px 10px rgba(0,0,0,0.1);
@@ -95,7 +93,7 @@
         onmouseover="this.style.transform='scale(1.03)'"
         onmouseout="this.style.transform='scale(1)'">
 
-            <h3>📜 Government Schemes</h3>
+            <h3>Government Schemes</h3>
             <p style="font-size:14px; color:#555;">
                 Explore govt schemes & benefits
             </p>
@@ -121,7 +119,7 @@
         onmouseover="this.style.transform='scale(1.03)'"
         onmouseout="this.style.transform='scale(1)'">
         
-            <h2>🌱 Soil Analysis</h2>
+            <h2>Soil Analysis</h2>
             <p>Analyze soil health & get fertilizer suggestions</p>
         </div>
 
@@ -142,7 +140,7 @@
         onmouseover="this.style.transform='scale(1.03)'"
         onmouseout="this.style.transform='scale(1)'">
         
-            <h2>❓ FAQ Support</h2>
+            <h2>FAQ Support</h2>
             <p>Get answers to common farming questions</p>
         </div>
 
