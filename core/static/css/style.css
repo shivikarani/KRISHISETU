@@ -78,6 +78,7 @@ input, select, textarea {
     color: #2e7d32;
     font-size: 2rem;
     margin-bottom: 10px;
+    max-width: 900px;
 }
 
 .dashboard-links {
@@ -210,4 +211,6 @@ nav a:hover {
     border: 1px solid #ccc;
     font-size: 14px;
 }
+
+
 
