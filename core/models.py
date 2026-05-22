@@ -213,3 +213,14 @@ def create_profile(sender, instance, created, **kwargs):
         from .models import UserProfile   # 🔥 yahan import karo
         UserProfile.objects.create(user=instance)
     
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    mobile = models.CharField(max_length=15)
+    email = models.EmailField()
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name

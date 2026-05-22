@@ -76,7 +76,7 @@ def dashboard(request):
             "humidity": data["main"]["humidity"],
             "description": data["weather"][0]["description"],
             "icon": data["weather"][0]["icon"],
-            "wind": data["wind"]["speed"],          # 🔥 add
+            "wind": data["wind"]["speed"],          # add
             "pressure": data["main"]["pressure"]
         }
 
@@ -284,11 +284,11 @@ def crop_recommendation(request):
             rainfall = form.cleaned_data["rainfall"]
             rain_unit = form.cleaned_data["rain_unit"]
 
-            # ✅ convert temperature to Celsius
+            # convert temperature to Celsius
             if temp_unit == 'F':
                 temp = (temp - 32) * 5/9
 
-            # ✅ convert rainfall to mm
+            # convert rainfall to mm
             if rain_unit == 'cm':
                 rainfall = rainfall * 10
 
@@ -353,7 +353,7 @@ def profile(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Profile updated successfully ✅")
-            return redirect('dashboard')    # 🔥 IMPORTANT
+            return redirect('dashboard')    # IMPORTANT
     else:
         form = ProfileForm(instance=profile)
 
@@ -436,7 +436,7 @@ def detect_disease(request):
                 result = prediction
 
             except Exception as e:
-                result = "⚠️ Could not process image. Showing default result."
+                result = "Could not process image. Showing default result."
 
                 # ✅ DEFAULT SAFE OUTPUT
                 result = "🌿 Healthy Crop (Model temporarily unavailable)"
@@ -446,7 +446,7 @@ def detect_disease(request):
 
         else:
             # ✅ Form invalid (PDF, wrong file etc)
-            result = "⚠️ Please upload a valid crop image in JPG/JPEG format"
+            result = "Please upload a valid crop image in JPG/JPEG format"
 
     else:
         form = DiseaseForm()
@@ -674,3 +674,25 @@ def faq(request):
     ]
 
     return render(request, "core/faq.html", {"faqs": faqs})
+
+
+
+from django.contrib import messages
+from django.shortcuts import redirect
+
+def contact(request):
+
+    if request.method == "POST":
+
+        name = request.POST.get('name')
+        mobile = request.POST.get('mobile')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        print(name, mobile, email, message)
+
+        messages.success(request, "Message sent successfully!")
+
+        return redirect(request.META.get('HTTP_REFERER'))
+
+    return redirect('/')

@@ -6,6 +6,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KrishiSetu</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+
+    .contact-footer{
+        background:#1b5e20;
+        padding:60px 0;
+        margin-top:60px;
+    }
+
+    .contact-container{
+        width:60%;
+        margin:auto;
+        background:#d9f0dc;
+        padding:30px;
+        border-radius:20px;
+        box-shadow:0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .contact-title{
+        text-align:center;
+        color:#2e7d32;
+        margin-bottom:40px;
+        font-size:40px;
+        font-weight:bold;
+    }
+
+    .contact-row{
+        display:flex;
+        gap:20px;
+        margin-bottom:25px;
+    }
+
+    .contact-group{
+        flex:1;
+        display:flex;
+        flex-direction:column;
+    }
+
+    .contact-group label{
+        margin-bottom:8px;
+        font-weight:600;
+        color:#333;
+        font-size:18px;
+    }
+
+    .contact-group input,
+    .contact-group textarea{
+        padding:14px;
+        border:1px solid #ccc;
+        border-radius:8px;
+        font-size:16px;
+        width:100%;
+    }
+
+    .contact-group textarea{
+        resize:none;
+    }
+
+    .contact-btn{
+        display:block;
+        margin:20px auto 0;
+        background:#2e7d32;
+        color:white;
+        padding:14px 40px;
+        border:none;
+        border-radius:8px;
+        font-size:20px;
+        cursor:pointer;
+        transition:0.3s;
+    }
+
+    .contact-btn:hover{
+        background:#1b5e20;
+    }
+
+    @media(max-width:768px){
+
+        .contact-row{
+            flex-direction:column;
+        }
+
+        .contact-container{
+            width:92%;
+            padding:25px;
+        }
+
+    }
+
+    .alert-success{
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+
+    animation: fadeOut 5s forwards;
+}
+
+@keyframes fadeOut {
+    0%{
+        opacity:1;
+    }
+
+    80%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+        display:none;
+    }
+}
+
+</style>
 </head>
 <body>
     <header>
@@ -31,6 +146,7 @@
         <a href="{% url 'knowledge_base' %}">Knowledge Base</a>
         <a href="{% url 'disease' %}">🌿 Disease Detection</a>
         <a href="{% url 'soil_analysis' %}">🌱 Soil Analysis</a>
+        <a href="#contact-section">Contact Us</a>
 
         <a href="{% url 'notifications' %}">
             🔔 Notifications
@@ -70,7 +186,16 @@
 <!-- ✅ TRANSLATOR FOR ALL -->
 <div id="google_translate_element" style="margin:10px;"></div>
     </header>
+    
+  
     <main>
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert-success">
+            ✅ {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
         {% block content %}{% endblock %}
     </main>
     <hr>
@@ -79,6 +204,59 @@
     <div style="text-align:center;">
         <h3>🌾 KrishiSetu</h3>
         <p>Empowering Farmers with Smart Technology</p>
+        
+    
+        <section id="contact-section" class="contact-footer">
+
+    <div class="contact-container">
+
+        <h2 class="contact-title">
+            📞 Connect With Us
+        </h2>
+
+        <form method="POST" action="{% url 'contact' %}">
+
+            {% csrf_token %}
+
+            <div class="contact-row">
+
+                <div class="contact-group">
+                    <label>Name*</label>
+                    <input type="text" name="name" placeholder="Enter your name" required>
+                </div>
+
+                <div class="contact-group">
+                    <label>Mobile*</label>
+                    <input type="text" name="mobile" placeholder="Enter mobile number" required>
+                </div>
+
+                <div class="contact-group">
+                    <label>Email*</label>
+                    <input type="email" name="email" placeholder="Enter email" required>
+                </div>
+
+            </div>
+
+            <div class="contact-group">
+                <label>Message*</label>
+
+                <textarea 
+                    name="message"
+                    rows="4"
+                    placeholder="Write your message here..."
+                    required>
+                </textarea>
+            </div>
+
+            <button type="submit" class="contact-btn">
+                Submit
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
 
         <p>
             <a href="/" style="color:white; margin:10px;">Home</a> |
