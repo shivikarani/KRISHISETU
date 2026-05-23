@@ -6,7 +6,7 @@
         <p style="color: green;">{{ message }}</p>
     {% endfor %}
 {% endif %}
-<div class="dashboard-container">
+<div class="dashboard-container"  style="max-width: 900px; width: 100%; margin: 0 auto; padding: 20px;" >
     <h2>Farmer Dashboard</h2>
     <p>Welcome, {{ request.user.username }}!</p>
 
@@ -60,7 +60,7 @@
     <!-- Crop Recommendation Card -->
     <a href="{% url 'crop_recommendation' %}" style="text-decoration:none; flex:1;">
         <div style="
-            width:100%;
+            width:80%;
             padding:25px;
             background:#e8f5e9;
             border-radius:12px;
@@ -82,7 +82,7 @@
     <!-- Government Schemes Card -->
     <a href="{% url 'schemes' %}" style="text-decoration:none; flex:1;">
         <div style="
-            width:100%;
+            width:90%;
             padding:25px;
             background:#e8f5e9;   /* SAME GREEN COLOR */
             border-radius:12px;
@@ -107,7 +107,7 @@
     <!-- Soil Analysis Card -->
     <a href="{% url 'soil_analysis' %}" class="dashboard-card">
         <div style="
-            width:100%;
+            width:96%;
             margin:10px;
             padding:25px;
             background:#e8f5e9;
