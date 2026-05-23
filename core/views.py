@@ -31,17 +31,34 @@ def register(request):
  
 
 def login_view(request):
+
     if request.method == 'POST':
+
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            login(request, user)
 
-            # Redirect based on role
-            return redirect_user_dashboard(request)
+            # CHECK EXPERT
+            if hasattr(user, 'expertprofile'):
+
+                # NOT APPROVED
+                if not user.expertprofile.is_approved:
+                    messages.error(
+                        request,
+                        'Your expert account is waiting for admin approval.'
+                    )
+                    return render(request, 'core/expert_pending.html')
+
+                # APPROVED EXPERT
+                login(request, user)
+                return redirect('expert_dashboard')
+
+            # NORMAL FARMER
+            login(request, user)
+            return redirect('dashboard')
 
         else:
             messages.error(request, 'Invalid username or password')
