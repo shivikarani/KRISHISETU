@@ -71,7 +71,7 @@ def dashboard(request):
 
     if response.status_code == 200:
         weather_data = {
-            "city": data["name"],   # 🔥 IMPORTANT FIX
+            "city": data["name"],   # IMPORTANT FIX
             "temperature": data["main"]["temp"],
             "humidity": data["main"]["humidity"],
             "description": data["weather"][0]["description"],
@@ -94,7 +94,7 @@ def dashboard(request):
 
     if response.status_code != 200:
        weather_data = None
-       advisory = "⚠️ Please enter a valid city name"
+       advisory = "Please enter a valid city name"
 
     return render(request, 'core/dashboard.html', {
         "weather": weather_data,
@@ -438,14 +438,14 @@ def detect_disease(request):
             except Exception as e:
                 result = "Could not process image. Showing default result."
 
-                # ✅ DEFAULT SAFE OUTPUT
+                # DEFAULT SAFE OUTPUT
                 result = "🌿 Healthy Crop (Model temporarily unavailable)"
 
             obj.result = result
             obj.save()
 
         else:
-            # ✅ Form invalid (PDF, wrong file etc)
+            # Form invalid (PDF, wrong file etc)
             result = "Please upload a valid crop image in JPG/JPEG format"
 
     else:
@@ -524,7 +524,7 @@ def soil_analysis(request):
             lat = obj.latitude
             lon = obj.longitude
 
-            # 🔥 SIMPLE LOGIC (replace later with API/ML)
+            # SIMPLE LOGIC (replace later with API/ML)
             if lat > 25:
                 soil = "Loamy Soil"
                 crop = "Wheat"
@@ -642,10 +642,7 @@ def faq(request):
             "question": "How to update my profile?",
             "answer": "Click on Profile in navbar and update your details."
         },
-        # {
-        #     "question": "Can I upload profile picture?",
-        #     "answer": "Yes, you can upload your profile image."
-        # },
+       
 
         # SEARCH & LANGUAGE
         {

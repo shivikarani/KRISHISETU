@@ -110,11 +110,11 @@ class DiseaseForm(forms.ModelForm):
         image = self.cleaned_data.get('image')
 
         if image:
-            # ✅ File type check
+            # File type check
             if not image.name.endswith(('.jpg', '.jpeg')):
                 raise forms.ValidationError("Only JPG/JPEG images allowed")
 
-            # ✅ Optional size limit (5MB)
+            # Optional size limit (5MB)
             if image.size > 5 * 1024 * 1024:
                 raise forms.ValidationError("Image size should be less than 5MB")
 

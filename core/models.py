@@ -152,7 +152,7 @@ class UserProfile(models.Model):
 
 class DiseaseDetection(models.Model):
     image = models.ImageField(upload_to='diseases/')
-    crop = models.CharField(max_length=50)   # 🔥 ADD THIS
+    crop = models.CharField(max_length=50)   #  ADD THIS
     result = models.TextField(blank=True)
 
 
@@ -210,7 +210,7 @@ from django.contrib.auth.models import User
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
     if created:
-        from .models import UserProfile   # 🔥 yahan import karo
+        from .models import UserProfile   # yahan import karo
         UserProfile.objects.create(user=instance)
     
 
