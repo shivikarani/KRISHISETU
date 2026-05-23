@@ -674,6 +674,7 @@ def faq(request):
 
 
 
+from .models import Contact
 from django.contrib import messages
 from django.shortcuts import redirect
 
@@ -686,7 +687,13 @@ def contact(request):
         email = request.POST.get('email')
         message = request.POST.get('message')
 
-        print(name, mobile, email, message)
+        # SAVE IN DATABASE
+        Contact.objects.create(
+            name=name,
+            mobile=mobile,
+            email=email,
+            message=message
+        )
 
         messages.success(request, "Message sent successfully!")
 

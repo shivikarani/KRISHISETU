@@ -24,3 +24,9 @@ admin.site.register(DiseaseDetection)
 from .models import ExpertProfile
 
 admin.site.register(ExpertProfile)
+
+
+from django.contrib import admin
+from .models import Contact
+
+admin.site.register(Contact)
