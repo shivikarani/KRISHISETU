@@ -233,12 +233,35 @@
 </section>
 
         <p>
-            <a href="/" style="color:white; margin:10px;">Home</a> |
-            <a href="/schemes/" style="color:white; margin:10px;">Schemes</a> |
-            <a href="/submit-query/" style="color:white; margin:10px;">Ask Query</a> |
-            <a href="/profile/" style="color:white; margin:10px;">Profile</a> |
-            <a href="{% url 'faq' %}" style="color:white; margin:10px;">FAQ</a>
-        </p>
+    <a href="/" style="color:white; margin:10px;">Home</a> |
+    <a href="/schemes/" style="color:white; margin:10px;">Schemes</a> |
+
+    {% if user.is_authenticated %}
+
+        {% if user.groups.all.0.name != "Expert" %}
+
+            <a href="/submit-query/" style="color:white; margin:10px;">
+                Ask Query
+            </a> |
+
+            <a href="/profile/" style="color:white; margin:10px;">
+                Profile
+            </a> |
+
+            <a href="{% url 'faq' %}" style="color:white; margin:10px;">
+                FAQ
+            </a>
+
+        {% endif %}
+
+    {% else %}
+
+        <a href="{% url 'faq' %}" style="color:white; margin:10px;">
+            FAQ
+        </a>
+
+    {% endif %}
+</p>
 
         <p style="font-size:14px; margin-top:10px;">
             © 2026 KrishiSetu | Made for Farmers 🌱
