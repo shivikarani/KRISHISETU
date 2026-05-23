@@ -9,7 +9,7 @@
     <h3>{{ query.title }}</h3>
     <p><strong>Description:</strong> {{ query.description }}</p>
     <p><strong>Status:</strong> {{ query.status }}</p>
-    <p><strong>Date:</strong> {{ query.created_at }}</p>
+    <p><strong>Date:</strong> {{ query.created_at|date:"d M Y, h:i A" }}</p>
 
     {% if query.image %}
         <img src="{{ query.image.url }}" width="200">
