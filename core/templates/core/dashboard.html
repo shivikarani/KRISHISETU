@@ -33,7 +33,9 @@
     </button>
 </form>
 {% if weather %}
+
 <div class="weather-card">
+    
     <h3> Weather in {{ weather.city }}</h3>
 
     <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png">
@@ -58,15 +60,17 @@
 <div style="display:flex; gap:20px; margin-top:20px; width:100%;">
 
     <!-- Crop Recommendation Card -->
-    <a href="{% url 'crop_recommendation' %}" style="text-decoration:none; flex:1;">
+    <a href="{% url 'crop_recommendation' %}" style="text-decoration:none; flex:1; min-width:300px;">
         <div style="
-            width:80%;
+           width:100%;
+            min-height:180px;
             padding:25px;
             background:#e8f5e9;
             border-radius:12px;
             text-align:center;
             box-shadow:0 4px 10px rgba(0,0,0,0.1);
             transition:0.3s;
+            box-sizing:border-box;
         " 
         onmouseover="this.style.transform='scale(1.03)'"
         onmouseout="this.style.transform='scale(1)'">
@@ -80,15 +84,17 @@
     </a>
 
     <!-- Government Schemes Card -->
-    <a href="{% url 'schemes' %}" style="text-decoration:none; flex:1;">
+    <a href="{% url 'schemes' %}" style="text-decoration:none; flex:1; min-width:300px;">
         <div style="
-            width:90%;
+           width:100%;
+            min-height:180px;
             padding:25px;
-            background:#e8f5e9;   /* SAME GREEN COLOR */
+            background:#e8f5e9;
             border-radius:12px;
             text-align:center;
             box-shadow:0 4px 10px rgba(0,0,0,0.1);
             transition:0.3s;
+            box-sizing:border-box;
         "
         onmouseover="this.style.transform='scale(1.03)'"
         onmouseout="this.style.transform='scale(1)'">
@@ -105,16 +111,17 @@
 <div class="dashboard-cards">
 
     <!-- Soil Analysis Card -->
-    <a href="{% url 'soil_analysis' %}" class="dashboard-card">
+    <a href="{% url 'soil_analysis' %}" class="dashboard-card" style="text-decoration:none; flex:1; min-width:300px;">
         <div style="
-            width:96%;
-            margin:10px;
+           width:100%;
+            min-height:180px;
             padding:25px;
             background:#e8f5e9;
             border-radius:12px;
             text-align:center;
             box-shadow:0 4px 10px rgba(0,0,0,0.1);
             transition:0.3s;
+            box-sizing:border-box;
         " 
         onmouseover="this.style.transform='scale(1.03)'"
         onmouseout="this.style.transform='scale(1)'">
@@ -126,16 +133,17 @@
     </a>
 
     <!-- FAQ Card -->
-    <a href="{% url 'faq' %}" class="dashboard-card">
+    <a href="{% url 'faq' %}" class="dashboard-card" style="text-decoration:none; flex:1; min-width:300px;">
         <div style="
-            width:100%;;
-            margin:10px
+            width:100%;
+            min-height:180px;
             padding:25px;
             background:#e8f5e9;
             border-radius:12px;
             text-align:center;
             box-shadow:0 4px 10px rgba(0,0,0,0.1);
             transition:0.3s;
+            box-sizing:border-box;;
         " 
         onmouseover="this.style.transform='scale(1.03)'"
         onmouseout="this.style.transform='scale(1)'">
