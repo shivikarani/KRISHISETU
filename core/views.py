@@ -258,27 +258,45 @@ import requests
 from django.http import JsonResponse
 
 
+from django.http import JsonResponse
+from django.conf import settings
+import requests
+
+from django.http import JsonResponse
+from django.conf import settings
+import requests
+
+from django.http import JsonResponse
+import requests
+
 def market_prices(request):
 
-    api_key = settings.DATA_GOV_API_KEY
-    state = request.GET.get("state")
-    url = f"https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=579b464db66ec23bdd000001adf9c207395e44127e9e6a3e5fc9f71d&format=json&limit=100&offset=100"
-    if state:
-        url += f"&filters[state]={state}"
+    url = "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=579b464db66ec23bdd000001adf9c207395e44127e9e6a3e5fc9f71d&format=json&limit=20"
+
+    headers = {
+        "User-Agent": "Mozilla/5.0"
+    }
+
     try:
 
-        response = requests.get(url, timeout=10)
+        response = requests.get(
+            url,
+            headers=headers,
+            timeout=20
+        )
 
-        if response.status_code == 200:
-            data = response.json()
-            records = data.get("records", [])
-            return JsonResponse(records, safe=False)
+        data = response.json()
 
-        else:
-            return JsonResponse({"error": "API not responding"}, status=500)
+        return JsonResponse(
+            data.get("records", []),
+            safe=False
+        )
 
-    except requests.exceptions.RequestException as e:
-        return JsonResponse({"error": "Connection failed"}, status=500)
+    except Exception as e:
+
+        return JsonResponse({
+            "error": str(e)
+        })
 
 
 
