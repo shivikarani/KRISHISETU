@@ -623,10 +623,7 @@ def faq(request):
             "question": "How to check weather for my location?",
             "answer": "Enter your city name to get weather details."
         },
-        # {
-        #     "question": "Can I check weather for village?",
-        #     "answer": "Yes, use 'Use My Location' button for accurate weather based on your location."
-        # },
+       
 
         # CROP RECOMMENDATION
         {
@@ -649,7 +646,7 @@ def faq(request):
         },
         {
             "question": "Which fertilizer should I use?",
-            "answer": "Depends on crop and soil. You can ask expert or future soil module will help."
+            "answer": "Depends on crop and soil. You can ask expert or soil module will help."
         },
         {
             "question": "How to control pests?",
@@ -675,7 +672,7 @@ def faq(request):
         # 👤 PROFILE
         {
             "question": "How to update my profile?",
-            "answer": "Click on Profile in navbar and update your details."
+            "answer": "Click on Profile in bottom of the website and update your details."
         },
        
 

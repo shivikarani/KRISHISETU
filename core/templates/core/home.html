@@ -47,8 +47,14 @@
 <div class="hero" width="100%">
     <h1>🌾 KrishiSetu</h1>
     <p>Empowering Farmers with Smart Technology</p>
+    {% if user.is_authenticated %}
+
+    {% if not user.groups.all.0.name == "Expert" %}
 
     <a href="/submit-query/" class="btn-main">Ask Question</a>
+    {% endif %}
+
+{% endif %}
     <a href="/schemes/" class="btn-main">View Schemes</a>
 </div>
 
